@@ -1,0 +1,45 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank lesspad">
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.fb_cookie.detail.fbid']} (*)"/>
+        <p:outputPanel>
+            <p:inputNumber readonly="true" id="id_fbid" value="#{fb_cookieLazyService.newObject.fbid}" required="true" requiredMessage="#{msg['obj.fb_cookie.detail.fbid.validateMsg']}" decimalPlaces="0">
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.fb_cookie.detail.fbid.helpMsg']}"/>
+                <p:message id="msg_id_fbid" for="id_fbid"/>
+            </p:inputNumber>
+        </p:outputPanel>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.fb_cookie.detail.name']} (*)"/>
+        <p:outputPanel>
+            <p:inputText  id="id_name" style="width:90%"  value="#{fb_cookieLazyService.newObject.name}" required="true" requiredMessage="#{msg['obj.fb_cookie.detail.name.validateMsg']}">
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.fb_cookie.detail.name.helpMsg']}"/>
+                <p:message id="msg_id_name" for="id_name"/>
+            </p:inputText>
+        </p:outputPanel>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.fb_cookie.detail.cookie']}"/>
+        <p:outputPanel>
+            <p:inputText  id="id_cookie" style="width:90%"  value="#{fb_cookieLazyService.newObject.cookie}">
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.fb_cookie.detail.cookie.helpMsg']}"/>
+                <p:message id="msg_id_cookie" for="id_cookie"/>
+            </p:inputText>
+        </p:outputPanel>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.fb_cookie.detail.createdtime']}"/>
+        <p:outputPanel>
+            <p:calendar  id="id_createdtime" value="#{fb_cookieLazyService.newObject.createdtime}" pattern="dd/MM/yyyy HH:mm:ss">
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.fb_cookie.detail.createdtime.helpMsg']}"/>
+                <p:message id="msg_id_createdtime" for="id_createdtime"/>
+            </p:calendar>
+        </p:outputPanel>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.fb_cookie.detail.state']}"/>
+        <p:outputPanel>
+            <p:inputText  id="id_state" style="width:90%"  value="#{fb_cookieLazyService.newObject.state}">
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.fb_cookie.detail.state.helpMsg']}"/>
+                <p:message id="msg_id_state" for="id_state"/>
+            </p:inputText>
+        </p:outputPanel>
+
+    </p:panelGrid>
+</ui:composition>

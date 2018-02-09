@@ -1,0 +1,16 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank lesspad">
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.vnphone.detail.id']} (*)"/>
+        <h:outputText style="white-space: pre-wrap" value="#{vnphoneLazyService.selectedObject.id}"/>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.vnphone.detail.phone']} (*)"/>
+        <h:outputText style="white-space: pre-wrap" value="#{vnphoneLazyService.selectedObject.phone}"/>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.vnphone.detail.uid']} (*)"/>
+        <h:outputText style="white-space: pre-wrap" value="#{vnphoneLazyService.selectedObject.uid}"/>
+
+    </p:panelGrid>
+</ui:composition>

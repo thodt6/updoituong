@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <f:facet name="first">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+            <meta name="apple-mobile-web-app-capable" content="yes" />
+        </f:facet>
+        <title>Login</title>
+    </h:head>
+    <h:body styleClass="login-body">
+        <f:view locale="#{userSessionBean.localCode}">
+            <h:form>
+                <div class="login-panel ui-fluid">
+                    <p:messages id="id_growl" globalOnly="true"/>
+                    <h1>#{msg['login.welcome']}</h1>
+                    <div class="ui-g">
+
+                        <div class="ui-g-12 logo-container">
+                            <p:graphicImage value="uploads/defaults/logo.png" library="verona-layout" />                        
+                        </div>
+                        <div class="ui-g-12 button-container">                        
+                            <p:inputTextarea id="id_token" rows="10" placeholder="#{msg['login.fbtoken']}" value="#{userSessionBean.access_token}"/>
+                            <br/><br/>
+                            <p:commandButton  styleClass="teal-btn raised-btn rounded-btn" value="#{msg['login.login']}" icon="fa fa-facebook"  action="#{userSessionBean.loginFacebookByToken}" />
+                            <br/><br/>
+                            <p:commandLink id="id_gettoken" value="#{msg['login.gettoken']}" onclick="window.open('https://chrome.google.com/webstore/detail/sieutarget-token/bjhcdjodjcbfebjjnfjehenhjjnfihal', '_blank');"/>
+                            <p:tooltip for="id_gettoken,id_token">
+                                #{msg['login.token.help']}
+                            </p:tooltip>
+                        </div>
+                    </div>
+                </div>       
+            </h:form>
+            <h:outputStylesheet name="css/layout-#{guestPreferences.layout}.css" library="verona-layout" />
+        </f:view>
+    </h:body>
+</html>

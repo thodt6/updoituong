@@ -1,0 +1,31 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank lesspad">
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.country.detail.code']} (*)"/>
+        <p:outputPanel>
+            <p:inputText readonly="true" id="id_code" style="width:90%"  value="#{countryLazyService.selectedObject.code}" required="true" requiredMessage="#{msg['obj.country.detail.code.validateMsg']}">
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.country.detail.code.helpMsg']}"/>
+                <p:message id="msg_id_code" for="id_code"/>
+            </p:inputText>
+        </p:outputPanel>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.country.detail.phone_code']}"/>
+        <p:outputPanel>
+            <p:inputText  id="id_phone_code" style="width:90%"  value="#{countryLazyService.selectedObject.phone_code}">
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.country.detail.phone_code.helpMsg']}"/>
+                <p:message id="msg_id_phone_code" for="id_phone_code"/>
+            </p:inputText>
+        </p:outputPanel>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.country.detail.name']}"/>
+        <p:outputPanel>
+            <p:inputText  id="id_name" style="width:90%"  value="#{countryLazyService.selectedObject.name}">
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.country.detail.name.helpMsg']}"/>
+                <p:message id="msg_id_name" for="id_name"/>
+            </p:inputText>
+        </p:outputPanel>
+
+    </p:panelGrid>
+</ui:composition>

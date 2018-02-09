@@ -1,0 +1,64 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+    <f:metadata>       
+        <f:event type="preRenderView" listener="#{userSessionBean.verifyAccessPage}"/>
+    </f:metadata>
+    <ui:define name="title">#{msg['obj.user.general']}</ui:define>
+    <ui:define name="viewname"> Profile / #{userSessionBean.user.username}</ui:define>
+    <ui:define name="content">
+        <div class="ui-g">
+            <div class="ui-g-12 ui-lg-12">
+                <p:panel>                        
+                    <div style=" float:  right">                        
+                        <p:button icon="fa fa-close" outcome="index.html"/>                          
+                    </div>                        
+                    <div style=" float: left">
+                        <i class="fa fa-fw fa-pencil"/>
+                        <p:spacer width="10"/>
+                        #{msg['obj.user.general']} / #{userSessionBean.user.username}
+                    </div>
+                    <br/>
+                    <br/>
+                    <p:separator/>
+
+                    <p:messages id="id_msg" closable="true"/>
+                    <div class="ui-g">
+                        <div class="ui-g-12 ui-lg-8">
+                            <h:form id="frmObject">
+                                <p:panel>
+                                    <ui:include src="index_content.xhtml"/>
+                                </p:panel>
+                                <br/>
+                                <div style="float: left;">
+                                    <p:button icon="fa fa-arrow-left"  value="#{msg['general.cancel']}" outcome="index.html"/>
+                                </div>
+                                <div style="float: right;">
+                                    <p:commandButton value="#{msg['general.save']}" action="#{userSessionBean.user.doUpdate}" update="id_msg" styleClass="pink-btn"/>                                 
+                                </div>    
+                            </h:form>
+                        </div>
+                        <div class="ui-g-12 ui-lg-4">
+                            <h:form>
+                                <p:panel>
+                                    <div class="card">
+                                        <h2>Update password</h2>
+                                        <p:password placeholder="#{msg['obj.user.detail.password']}" id="id_pwd1" style="width:90%" value="#{userSessionBean.user.password}" match="id_pwd2" label="Password" required="true" />
+                                        <br/>
+                                        <p:password placeholder="#{msg['obj.user.detail.retype_password']}" id="id_pwd2" style="width:90%" value="#{userSessionBean.user.password}"  label="Re-Enter Password"  required="true" />    
+                                        <br/><br/>
+                                        <p:messages id="msg_result"/>
+                                        <p:commandButton icon="fa fa-pencil" value="#{msg['general.update']}" action="#{userSessionBean.user.updatePassword}" update="msg_result"/>
+                                    </div>
+                                </p:panel>
+                            </h:form>
+                        </div>
+                    </div>
+                </p:panel>                    
+            </div>
+        </div> 
+    </ui:define>
+</ui:composition>

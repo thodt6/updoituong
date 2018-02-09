@@ -1,0 +1,40 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:pv="http://primefaces.org/verona">
+    <pv:menu id="menu" widgetVar="me">       
+        <p:menuitem id="menu_id_home" value="Dashboard" rendered="#{userSessionBean.user.groupListStr eq '2'}" icon="fa fa-fw fa-home" outcome="/portal/dashboard.html"/>
+        <p:submenu id="menu_id_platform_user_cms_user" rendered="#{userSessionBean.user.groupListStr eq '2'}" label="#{msg['menu.id_platform_user_cms_user']}" icon="fa fa-fw fa-user">
+            <p:menuitem id="menu_id_platform_user_cms_user_index" value="#{msg['menu.id_platform_user_cms_user_index']}" icon="fa fa-fw fa-angle-right" outcome="/portal/user/index.html"/>
+            <p:menuitem id="menu_id_platform_user_cms_user_create" value="#{msg['menu.id_platform_user_cms_user_create']}" icon="fa fa-fw fa-angle-right" outcome="/portal/user/create.html"/>
+        </p:submenu>
+        <p:submenu id="menu_id_platform_user_cms_group" rendered="#{userSessionBean.user.groupListStr eq '2'}" label="#{msg['menu.id_platform_user_cms_group']}" icon="fa fa-fw fa-group">
+            <p:menuitem id="menu_id_platform_user_cms_group_index" value="#{msg['menu.id_platform_user_cms_group_index']}" icon="fa fa-fw fa-angle-right" outcome="/portal/group/index.html"/>
+            <p:menuitem id="menu_id_platform_user_cms_group_create" value="#{msg['menu.id_platform_user_cms_group_create']}" icon="fa fa-fw fa-angle-right" outcome="/portal/group/create.html"/>
+        </p:submenu>
+        <p:menuitem id="menu_id_platform_user_cms_site_index" rendered="#{userSessionBean.user.groupListStr eq '2'}" value="Site setting" icon="fa fa-fw fa-sitemap" outcome="/portal/site/index.html"/>
+        <p:menuitem id="menu_id_vnphone_index" rendered="#{userSessionBean.user.groupListStr eq '2'}" value="#{msg['menu.id_vnphone_index']}" icon="fa fa-fw fa-search" outcome="/portal/vnphone/index.html"/>
+        <p:menuitem id="menu_id_vnphone_convert" rendered="#{userSessionBean.user.groupListStr eq '2'}" value="#{msg['menu.id_vnphone_convert']}" icon="fa fa-fw fa-exchange" outcome="/portal/uid_upload/index.html"/>
+        <p:menuitem id="menu_id_rate" rendered="#{userSessionBean.user.groupListStr eq '2'}" value="#{msg['menu.id_rate']}" icon="fa fa-fw fa-money" outcome="/portal/uid_rate/index.html"/>
+        <p:menuitem id="menu_id_client_management" rendered="#{userSessionBean.user.groupListStr eq '2'}" value="#{msg['menu.id_client_management']}" icon="fa fa-fw fa-user-secret" outcome="/portal/client_topup/index.html"/>
+        <p:submenu id="menu_id_fbscanning" rendered="#{userSessionBean.user.groupListStr eq '2'}" label="Facebook scanning" icon="fa fa-fw fa-facebook">
+            <p:submenu id="menu_id_fbscanning_country" rendered="#{userSessionBean.user.groupListStr eq '2'}" label="Scanning country" icon="fa fa-fw fa-globe">
+                <p:menuitem id="menu_id_app_fbphonecms_country_index" value="#{msg['menu.id_app_fbphonecms_country_index']}" icon="fa fa-fw fa-angle-right" outcome="/portal/fbscanning/country/index.html"/>
+                <p:menuitem id="menu_id_app_fbphonecms_country_create" value="#{msg['menu.id_app_fbphonecms_country_create']}" icon="fa fa-fw fa-angle-right" outcome="/portal/fbscanning/country/create.html"/>
+            </p:submenu> 
+            <p:submenu id="menu_id_facebook_cookie" rendered="#{userSessionBean.user.groupListStr eq '2'}" label="Facebook cookies" icon="fa fa-fw fa-user">
+                <p:menuitem id="menu_id_app_fbphonecms_fb_cookie_index" value="#{msg['menu.id_app_fbphonecms_fb_cookie_index']}" icon="fa fa-fw fa-angle-right" outcome="/portal/fbscanning/fb_cookie/index.html"/>
+                <p:menuitem id="menu_id_app_fbphonecms_fb_cookie_create" value="#{msg['menu.id_app_fbphonecms_fb_cookie_create']}" icon="fa fa-fw fa-angle-right" outcome="/portal/fbscanning/fb_cookie/create.html"/>
+            </p:submenu> 
+            <p:menuitem id="menu_id_fbscanning_appclient" rendered="#{userSessionBean.user.groupListStr eq '2'}" value="App Client" icon="fa fa-fw fa-terminal" outcome="/portal/fbscanning/appclient/index.html"/>
+            <p:submenu id="menu_id_fbscanning_mobilerange" rendered="#{userSessionBean.user.groupListStr eq '2'}" label="Mobile Number Range" icon="fa fa-fw fa-mobile">
+                <p:menuitem id="menu_id_app_fbphonecms_mobile_range_index" value="#{msg['menu.id_app_fbphonecms_mobile_range_index']}" icon="fa fa-fw fa-angle-right" outcome="/portal/fbscanning/mobile_range/index.html"/>
+                <p:menuitem id="menu_id_app_fbphonecms_mobile_range_create" value="#{msg['menu.id_app_fbphonecms_mobile_range_create']}" icon="fa fa-fw fa-angle-right" outcome="/portal/fbscanning/mobile_range/create.html"/>
+            </p:submenu>
+            <p:menuitem id="menu_id_fbscanning_task" value="Scanning Task" icon="fa fa-fw fa-tasks" outcome="/portal/fbscanning/scanning_task/index.html"/>
+        </p:submenu>
+        <p:menuitem id="menu_id_app_taodoituong_index" rendered="#{userSessionBean.user.groupListStr eq '3'}" value="#{msg['menu.home']}" icon="fa fa-fw fa-home" outcome="/portal/upobject/index.html"/>
+        <p:menuitem id="menu_id_sign-out" value="#{msg['general.logout']}" icon="fa fa-fw fa-sign-out" action="#{userSessionBean.doLogout}" />
+    </pv:menu>
+</ui:composition>

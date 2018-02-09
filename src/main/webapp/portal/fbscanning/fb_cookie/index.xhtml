@@ -1,0 +1,59 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+    <f:metadata>        
+        <f:event type="preRenderView" listener="#{userSessionBean.verifyAccessPage}"/>
+    </f:metadata>
+    <ui:define name="head">
+
+    </ui:define>
+    <ui:define name="title">#{msg['obj.fb_cookie.general.list']}</ui:define>
+    <ui:define name="viewname">#{msg['obj.fb_cookie.general.list']}</ui:define>
+    <ui:define name="content">
+        <div class="ui-g">
+            <div class="ui-g-12 ui-lg-12">
+                <p:panel>                        
+                    <div style=" float:  right">                        
+                        <p:button icon="fa fa-plus" value="Add Fb_cookie" outcome="create.html"/>  
+                        <p:button icon="fa fa-close"/>                          
+                    </div>                        
+                    <div style=" float: left">                        
+                        #{msg['obj.fb_cookie.general.list']}
+                    </div>
+                    <br/>
+                    <br/>
+                    <p:separator/>
+                    <h:form id="frmObject">
+                        <p:messages id="id_msg" closable="true"/>
+                        <div class="ui-g">
+                            <div class="ui-g-12 ui-lg-12">
+                                <ui:include src="index_content.xhtml"/>
+                            </div>
+                            <div class="ui-g-12 ui-lg-3">
+
+                            </div>
+                        </div>
+                    </h:form>
+                </p:panel>                    
+                <p:confirmDialog global="true"  id="id_dlgDelete" showEffect="fade" hideEffect="explode">
+                    <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                </p:confirmDialog>   
+            </div>
+        </div> 
+        <h:form id="frmTest">
+            <p:dialog widgetVar="dlgTest" header="Test Account" closable="true">
+                <p:panel>
+                    <p:inputText value="#{fb_cookieLazyService.test_number}" placeholder="Enter Number"/>
+                    <f:facet name="footer">
+                        <p:messages id="msg_test"/>
+                        <p:commandButton value="Test" action="#{fb_cookieLazyService.doTestAccount}" update="msg_test"/>
+                    </f:facet>
+                </p:panel>
+            </p:dialog>
+        </h:form>
+    </ui:define>
+</ui:composition>

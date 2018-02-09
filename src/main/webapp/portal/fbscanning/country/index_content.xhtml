@@ -1,0 +1,47 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <p:dataTable    value="#{countryLazyService.lazyModel}"  var="obj"   id="id_table_country"  reflow="true"   widgetVar="dlgTablecountry"
+                    selection="#{countryLazyService.selectedObject}" lazy="true" rowKey="#{obj.code}"  rows="20" paginator="true"
+                    emptyMessage="#{msg['obj.country.general.listempty']}" resizableColumns="true" paginatorPosition="bottom" 
+                    paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                    rowsPerPageTemplate="10,20,30,40,50,60,70,80,90,100">
+        <f:facet name="header">
+
+        </f:facet>
+        <p:column style="text-align: left;" filterBy="#{obj.code}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.country.detail.code']}
+            </f:facet>
+            <h:outputText style="white-space: pre-wrap" value="#{obj.code}"/>
+        </p:column>
+        <p:column style="text-align: left;" filterBy="#{obj.phone_code}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.country.detail.phone_code']}
+            </f:facet>
+            <h:outputText style="white-space: pre-wrap" value="#{obj.phone_code}"/>
+        </p:column>
+        <p:column style="text-align: left;" filterBy="#{obj.name}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.country.detail.name']}
+            </f:facet>
+            <h:outputText style="white-space: pre-wrap" value="#{obj.name}"/>
+        </p:column>
+
+        <p:column headerText="#{msg['general.control']}" style=" text-align: center">
+            <p:button icon="fa fa-search" outcome="view.html?id=#{obj.code}"/>  
+            <p:button icon="fa fa-pencil" outcome="edit.html?id=#{obj.code}"/>                          
+            <p:commandButton icon="fa fa-close"   action="#{countryLazyService.deleteObject}" update="id_table_country" >
+                <f:setPropertyActionListener target="#{countryLazyService.selectedObject}" value="#{obj}"/>
+                <p:confirm header="#{msg['general.confirm']}" message="#{msg['general.confirm.description']}" icon="ui-icon-alert" />
+            </p:commandButton>
+        </p:column>
+
+        <f:facet name="footer">
+
+        </f:facet>    
+    </p:dataTable>
+</ui:composition>

@@ -1,0 +1,22 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank lesspad">
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.fb_cookie.detail.fbid']} (*)"/>
+        <h:outputText style="white-space: pre-wrap" value="#{fb_cookieLazyService.selectedObject.fbid}"/>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.fb_cookie.detail.name']} (*)"/>
+        <h:outputText style="white-space: pre-wrap" value="#{fb_cookieLazyService.selectedObject.name}"/>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.fb_cookie.detail.cookie']}"/>
+        <h:outputText style="white-space: pre-wrap" value="#{fb_cookieLazyService.selectedObject.cookie}"/>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.fb_cookie.detail.createdtime']}"/>
+        <h:outputText value="#{fb_cookieLazyService.selectedObject.createdtime}">
+            <f:convertDateTime type="date" timeZone="GMT+7" pattern="dd/MM/yyyy HH:mm:ss"/>
+        </h:outputText>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.fb_cookie.detail.state']}"/>
+        <h:outputText style="white-space: pre-wrap" value="#{fb_cookieLazyService.selectedObject.state}"/>
+
+    </p:panelGrid>
+</ui:composition>

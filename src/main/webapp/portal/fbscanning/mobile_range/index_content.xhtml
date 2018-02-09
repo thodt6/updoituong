@@ -1,0 +1,86 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <p:dataTable    value="#{mobile_rangeLazyService.lazyModel}"  var="obj"   id="id_table_mobile_range"  reflow="true"   widgetVar="dlgTablemobile_range"
+                    selection="#{mobile_rangeLazyService.selectedObject}" lazy="true" rowKey="#{obj.range_id}"  rows="20" paginator="true"
+                    emptyMessage="#{msg['obj.mobile_range.general.listempty']}" resizableColumns="true" 
+                    paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                    rowsPerPageTemplate="10,20,30,40,50,60,70,80,90,100">
+        <f:facet name="header">
+
+        </f:facet>
+        <p:column style="text-align: left;" filterBy="#{obj.range_id}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.mobile_range.detail.range_id']}
+            </f:facet>
+            <h:outputText style="white-space: pre-wrap" value="#{obj.range_id}"/>
+        </p:column>
+        <p:column style="text-align: left;" filterBy="#{obj.prefix}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.mobile_range.detail.prefix']}
+            </f:facet>
+            <h:outputText style="white-space: pre-wrap" value="#{obj.prefix}"/>
+        </p:column>
+        <p:column style="text-align: left;" filterBy="#{obj.network_operator}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.mobile_range.detail.network_operator']}
+            </f:facet>
+            <h:outputText style="white-space: pre-wrap" value="#{obj.network_operator}"/>
+        </p:column>
+        <p:column style="text-align: left;" filterBy="#{obj.start_number}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.mobile_range.detail.start_number']}
+            </f:facet>
+            <h:outputText style="white-space: pre-wrap" value="#{obj.start_number}"/>
+        </p:column>
+        <p:column style="text-align: left;" filterBy="#{obj.stop_number}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.mobile_range.detail.stop_number']}
+            </f:facet>
+            <h:outputText style="white-space: pre-wrap" value="#{obj.stop_number}"/>
+        </p:column>
+        <p:column style="text-align: left;" filterBy="#{obj.state}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.mobile_range.detail.state']}
+            </f:facet>
+            <h:outputText style="white-space: pre-wrap" value="#{obj.state}"/>
+        </p:column>
+        <p:column style="text-align: left;" filterBy="#{obj.created_time}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.mobile_range.detail.created_time']}
+            </f:facet>
+            <h:outputText value="#{obj.created_time}">
+                <f:convertDateTime type="date" timeZone="GMT+7" pattern="dd/MM/yyyy HH:mm:ss"/>
+            </h:outputText>
+        </p:column>
+        <p:column style="text-align: left;" filterBy="#{obj.windows_size}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.mobile_range.detail.windows_size']}
+            </f:facet>
+            <h:outputText style="white-space: pre-wrap" value="#{obj.windows_size}"/>
+        </p:column>
+        <p:column style="text-align: left;" filterBy="#{obj.country_code}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.mobile_range.detail.country_code']}
+            </f:facet>
+            <h:outputText style="white-space: pre-wrap" value="#{obj.country_code}"/>
+        </p:column>
+
+        <p:column headerText="#{msg['general.control']}" style=" text-align: center">
+            <p:commandButton icon="fa fa-tasks" rendered="#{obj.state == 'U'}" action="#{obj.createTask}" update=":frmObject:id_msg"/>
+            <p:button icon="fa fa-search" outcome="view.html?id=#{obj.range_id}"/>  
+            <p:button icon="fa fa-pencil" outcome="edit.html?id=#{obj.range_id}"/>                          
+            <p:commandButton icon="fa fa-close"   action="#{mobile_rangeLazyService.deleteObject}" update="id_table_mobile_range" >
+                <f:setPropertyActionListener target="#{mobile_rangeLazyService.selectedObject}" value="#{obj}"/>
+                <p:confirm header="#{msg['general.confirm']}" message="#{msg['general.confirm.description']}" icon="ui-icon-alert" />
+            </p:commandButton>
+        </p:column>
+
+        <f:facet name="footer">
+
+        </f:facet>    
+    </p:dataTable>
+</ui:composition>

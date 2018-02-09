@@ -1,0 +1,108 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank lesspad">
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.id']} (*)"/>
+        <p:outputPanel>
+            <p:inputNumber readonly="true" id="id_id" value="#{userSessionBean.user.userid}" required="true" requiredMessage="#{msg['obj.user.detail.id.validateMsg']}" decimalPlaces="0">
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.id.helpMsg']}"/>
+                <p:message id="msg_id_id" for="id_id"/>
+            </p:inputNumber>
+        </p:outputPanel>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.oauth_provider']} (*)"/>
+        <p:outputPanel>
+            <p:inputText  id="id_oauth_provider" readonly="true" style="width:90%"  value="#{userSessionBean.user.oauth_provider}" required="true" requiredMessage="#{msg['obj.user.detail.oauth_provider.validateMsg']}">
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.oauth_provider.helpMsg']}"/>
+                <p:message id="msg_id_oauth_provider" for="id_oauth_provider"/>
+            </p:inputText>
+        </p:outputPanel>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.uid']}"/>
+        <p:outputPanel>
+            <p:inputText  id="id_uid" readonly="true"  style="width:90%"  value="#{userSessionBean.user.uid}">
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.uid.helpMsg']}"/>
+                <p:message id="msg_id_uid" for="id_uid"/>
+            </p:inputText>
+        </p:outputPanel>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.username']}"/>
+        <p:outputPanel>
+            <p:inputText  id="id_username" readonly="true" style="width:90%"  value="#{userSessionBean.user.username}">
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.username.helpMsg']}"/>
+                <p:message id="msg_id_username" for="id_username"/>
+            </p:inputText>
+        </p:outputPanel>    
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.email']}"/>
+        <p:outputPanel>
+            <p:inputText  id="id_email" style="width:90%"  value="#{userSessionBean.user.email}">
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.email.helpMsg']}"/>
+                <p:message id="msg_id_email" for="id_email"/>
+            </p:inputText>
+        </p:outputPanel>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.phone']}"/>
+        <p:outputPanel>
+            <p:inputText  id="id_phone" style="width:90%"  value="#{userSessionBean.user.phone}">
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.phone.helpMsg']}"/>
+                <p:message id="msg_id_phone" for="id_phone"/>
+            </p:inputText>
+        </p:outputPanel>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.first_name']}"/>
+        <p:outputPanel>
+            <p:inputText  id="id_first_name" style="width:90%"  value="#{userSessionBean.user.first_name}">
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.first_name.helpMsg']}"/>
+                <p:message id="msg_id_first_name" for="id_first_name"/>
+            </p:inputText>
+        </p:outputPanel>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.last_name']}"/>
+        <p:outputPanel>
+            <p:inputText  id="id_last_name" style="width:90%"  value="#{userSessionBean.user.last_name}">
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.last_name.helpMsg']}"/>
+                <p:message id="msg_id_last_name" for="id_last_name"/>
+            </p:inputText>
+        </p:outputPanel>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.gender']}"/>
+        <p:outputPanel>
+            <p:selectOneMenu value="#{userSessionBean.user.gender}"  >
+                <f:selectItem itemLabel="#{msg['general.select']}" itemValue="#{null}" noSelectionOption="true" />
+                <f:selectItem itemLabel="Male" itemValue="male"/>
+                <f:selectItem itemLabel="Female" itemValue="female"/>
+                <f:selectItem itemLabel="Others" itemValue="others"/>                  
+            </p:selectOneMenu>
+        </p:outputPanel>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.picture']}"/>
+        <p:outputPanel>
+            <h:graphicImage id="id_picture" value="#{userSessionBean.user.fullPictureUrl}" width="50"/>
+            <p:fileUpload fileUploadListener="#{userSessionBean.user.handleFileUpload}" mode="advanced" dragDropSupport="true" multiple="false"
+                          update="id_picture" sizeLimit="1000000000" allowTypes="/(\.|\/)(gif|jpe?g|png|bmp)$/" /> 
+        </p:outputPanel>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.country_code']}"/>
+        <p:outputPanel>
+            <p:inputText  id="id_country_code" style="width:90%"  value="#{userSessionBean.user.country_code}">
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.country_code.helpMsg']}"/>
+                <p:message id="msg_id_country_code" for="id_country_code"/>
+            </p:inputText>
+        </p:outputPanel>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.state']}"/>
+        <p:outputPanel>
+            <p:inputText  id="id_state" style="width:90%"  value="#{userSessionBean.user.state}">
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.state.helpMsg']}"/>
+                <p:message id="msg_id_state" for="id_state"/>
+            </p:inputText>
+        </p:outputPanel>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.city']}"/>
+        <p:outputPanel>
+            <p:inputText  id="id_city" style="width:90%"  value="#{userSessionBean.user.city}">
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.city.helpMsg']}"/>
+                <p:message id="msg_id_city" for="id_city"/>
+            </p:inputText>
+        </p:outputPanel>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.post_code']}"/>
+        <p:outputPanel>
+            <p:inputText  id="id_post_code" style="width:90%"  value="#{userSessionBean.user.post_code}">
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.post_code.helpMsg']}"/>
+                <p:message id="msg_id_post_code" for="id_post_code"/>
+            </p:inputText>
+        </p:outputPanel>                       
+    </p:panelGrid>
+</ui:composition>

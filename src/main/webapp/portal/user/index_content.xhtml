@@ -1,0 +1,191 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+    
+    <p:selectOneMenu filter="true" filterMatchMode="contains" value="#{userLazyService.groupid}">
+        <f:selectItem itemLabel="#{msg['general.select']} #{msg['obj.group.detail.groupid']}" itemValue="" />
+        <f:selectItems value="#{groupService.objects}" var="g" itemLabel="#{g.name}" itemValue="#{g.groupid}"/>
+        <p:ajax event="change" listener="#{userLazyService.loadObjects}" update="id_table_user"/>
+    </p:selectOneMenu>
+    <br/>
+    <p:dataTable    value="#{userLazyService.lazyModel}"  var="obj"   id="id_table_user"  reflow="true"   widgetVar="dlgTableuser"
+                    selection="#{userLazyService.selectedObject}" lazy="true" rowKey="#{obj.userid}"  rows="20" paginator="true"
+                    emptyMessage="#{msg['obj.user.general.listempty']}" resizableColumns="true" sortBy="userid" sortOrder="ascending"  
+                    paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                    rowsPerPageTemplate="10,20,30,40,50,60,70,80,90,100">
+        <f:facet name="header">
+
+        </f:facet>
+        <p:column width="16">
+            <p:rowToggler />
+        </p:column>
+        <p:rowExpansion>
+            <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank lesspad">
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.id']} (*)"/>
+                <h:outputText style="word-wrap: break-word;" value="#{obj.userid}"/>
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.oauth_provider']} (*)"/>
+                <h:outputText style="word-wrap: break-word;" value="#{obj.oauth_provider}"/>
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.uid']}"/>
+                <h:outputText style="word-wrap: break-word;" value="#{obj.uid}"/>
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.username']}"/>
+                <h:outputText style="word-wrap: break-word;" value="#{obj.username}"/>
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.password_hash']}"/>
+                <p:outputPanel>
+                    <h:outputText id="id_password_hash" style="word-wrap: break-word;" value="#{obj.password_hash}"/>
+                    <br/>
+                    <p:commandLink id="id_cmd_reset_pwd" value="Reset password">
+                    </p:commandLink>     
+                    <p:overlayPanel for="id_cmd_reset_pwd" my="left top" at="left bottom" showCloseIcon="true">
+                        <p:password placeholder="#{msg['obj.user.detail.password']}" id="id_pwd1" style="width:90%" value="#{obj.password}" match="id_pwd2" label="Password" required="true" />
+                        <br/>
+                        <p:password placeholder="#{msg['obj.user.detail.retype_password']}" id="id_pwd2" style="width:90%" value="#{obj.password}"  label="Re-Enter Password"  required="true" />    
+                        <p:separator/>
+                        <p:messages id="msg_result"/>
+                        <p:commandButton icon="fa fa-pencil" value="#{msg['general.update']}" action="#{obj.updatePassword}" update="msg_result,id_password_hash"/>
+                    </p:overlayPanel>
+                </p:outputPanel>
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.email']}"/>
+                <h:outputText style="word-wrap: break-word;" value="#{obj.email}"/>
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.phone']}"/>
+                <h:outputText style="word-wrap: break-word;" value="#{obj.phone}"/>
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.first_name']}"/>
+                <h:outputText style="word-wrap: break-word;" value="#{obj.first_name}"/>
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.last_name']}"/>
+                <h:outputText style="word-wrap: break-word;" value="#{obj.last_name}"/>
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.gender']}"/>
+                <h:outputText style="word-wrap: break-word;" value="#{obj.gender}"/>
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.picture']}"/>
+                <h:graphicImage value="#{obj.fullPictureUrl}" width="200"/>
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.country_code']}"/>
+                <h:outputText style="word-wrap: break-word;" value="#{obj.country_code}"/>
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.state']}"/>
+                <h:outputText style="word-wrap: break-word;" value="#{obj.state}"/>
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.city']}"/>
+                <h:outputText style="word-wrap: break-word;" value="#{obj.city}"/>
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.post_code']}"/>
+                <h:outputText style="word-wrap: break-word;" value="#{obj.post_code}"/>
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.created_time']}"/>
+                <h:outputText value="#{obj.created_time}">
+                    <f:convertDateTime type="date" timeZone="GMT+7" pattern="dd/MM/yyyy HH:mm:ss"/>
+                </h:outputText>
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.modified_time']}"/>
+                <h:outputText value="#{obj.modified_time}">
+                    <f:convertDateTime type="date" timeZone="GMT+7" pattern="dd/MM/yyyy HH:mm:ss"/>
+                </h:outputText>
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.last_login']}"/>
+                <h:outputText value="#{obj.last_login}">
+                    <f:convertDateTime type="date" timeZone="GMT+7" pattern="dd/MM/yyyy HH:mm:ss"/>
+                </h:outputText>
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.last_logout']}"/>
+                <h:outputText value="#{obj.last_logout}">
+                    <f:convertDateTime type="date" timeZone="GMT+7" pattern="dd/MM/yyyy HH:mm:ss"/>
+                </h:outputText>
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.status']}"/>
+                <h:outputText style="word-wrap: break-word;" value="#{obj.status}"/>
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.login_token']}"/>
+                <h:outputText style="word-wrap: break-word;" value="#{obj.login_token}"/>
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.expired_time']}"/>
+                <h:outputText style="word-wrap: break-word;" value="#{obj.expired_time}"/>
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.password_reset_token']}"/>
+                <h:outputText style="word-wrap: break-word;" value="#{obj.password_reset_token}"/>
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.application_id']}"/>
+                <h:outputText style="word-wrap: break-word;" value="#{obj.application_id}"/>
+
+            </p:panelGrid>
+        </p:rowExpansion>
+        <p:column style="text-align: left; width: 6%" filterBy="#{obj.userid}" filterMatchMode="exact" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.user.detail.id']}
+            </f:facet>      
+            <p:button value=" #{obj.userid}" styleClass="green-btn" rendered="#{obj.status eq 1}" outcome="view.html?id=#{obj.userid}"/> 
+            <p:button value=" #{obj.userid}" styleClass="purple-btn" rendered="#{obj.status != 1}" outcome="view.html?id=#{obj.userid}"/> 
+        </p:column>
+        <p:column style="text-align: left;" filterBy="#{obj.first_name}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.user.detail.first_name']} 
+                <br/>
+                #{msg['obj.user.detail.last_name']}
+            </f:facet>
+            <h:graphicImage value="#{obj.fullPictureUrl}" width="80%"/>
+            <br/>
+            <p:link style="word-wrap: break-word;" value="#{obj.first_name} #{obj.last_name}" outcome="view.html?id=#{obj.userid}"/>            
+        </p:column>
+        <p:column style="text-align: left;" filterBy="#{obj.oauth_provider}" filterMatchMode="exact" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.user.detail.oauth_provider']}
+            </f:facet>
+            <f:facet name="filter">
+                <p:selectOneMenu style="width:60px" onchange="PF('dlgTableuser').filter()" >
+                    <f:selectItem itemLabel="#{msg['general.select']}" itemValue="#{null}" noSelectionOption="true" />
+                    <f:selectItem itemLabel="Username" itemValue="username"/>
+                    <f:selectItem itemLabel="Email" itemValue="email"/>
+                    <f:selectItem itemLabel="Facebook" itemValue="facebook"/>
+                    <f:selectItem itemLabel="Goolge" itemValue="goolgle"/>
+                    <f:selectItem itemLabel="Phone" itemValue="phone"/>                    
+                </p:selectOneMenu>
+            </f:facet>
+            <h:outputText style="word-wrap: break-word;" value="#{obj.oauth_provider}"/>
+        </p:column>
+        <p:column style="text-align: left;" filterBy="#{obj.uid}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.user.detail.uid']}
+            </f:facet>
+            <h:outputText style="word-wrap: break-word;" value="#{obj.uid}"/>
+        </p:column>
+        <p:column style="text-align: left;" filterBy="#{obj.username}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.user.detail.username']}
+            </f:facet>
+            <h:outputText style="word-wrap: break-word;" value="#{obj.username}"/>
+        </p:column>
+        <p:column style="text-align: left;" filterBy="#{obj.email}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.user.detail.email']}
+            </f:facet>
+            <h:outputText style="word-wrap: break-word;" value="#{obj.email}"/>
+        </p:column>
+        <p:column style="text-align: left;" filterBy="#{obj.phone}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.user.detail.phone']}
+            </f:facet>
+            <h:outputText style="word-wrap: break-word;" value="#{obj.phone}"/>
+        </p:column>
+        <p:column style="text-align: left;" filterBy="#{obj.gender}" filterMatchMode="exact" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.user.detail.gender']}
+            </f:facet>
+            <f:facet name="filter">
+                <p:selectOneMenu style="width:60px" onchange="PF('dlgTableuser').filter()" >
+                    <f:selectItem itemLabel="#{msg['general.select']}" itemValue="#{null}" noSelectionOption="true" />
+                    <f:selectItem itemLabel="Male" itemValue="male"/>
+                    <f:selectItem itemLabel="Female" itemValue="female"/>
+                    <f:selectItem itemLabel="Others" itemValue="others"/>                  
+                </p:selectOneMenu>
+            </f:facet>
+            <h:outputText style="word-wrap: break-word;" value="#{obj.gender}"/>
+        </p:column>
+        <p:column style="text-align: left;" filterBy="#{obj.created_time}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.user.detail.created_time']}
+            </f:facet>            
+            <h:outputText value="#{obj.created_time}">
+                <f:convertDateTime type="date" timeZone="GMT+7" pattern="dd/MM/yyyy HH:mm:ss"/>
+            </h:outputText>
+        </p:column>
+        <p:column headerText="#{msg['general.control']}" style=" text-align: left">   
+            <p:commandButton oncomplete="PF('dlgGroup').show();" update=":frmGroup" icon="fa fa-group">
+                <f:setPropertyActionListener value="#{obj}" target="#{userLazyService.selectedObject}"/>
+            </p:commandButton>            
+            <p:button icon="fa fa-pencil" outcome="edit.html?id=#{obj.userid}"/>                          
+            <p:commandButton icon="fa fa-close"   action="#{userLazyService.deleteObject}" update="id_table_user" >
+                <f:setPropertyActionListener target="#{userLazyService.selectedObject}" value="#{obj}"/>
+                <p:confirm header="#{msg['general.confirm']}" message="#{msg['general.confirm.description']}" icon="ui-icon-alert" />
+            </p:commandButton>            
+        </p:column>
+        <f:facet name="footer">
+        </f:facet>    
+    </p:dataTable>
+    
+</ui:composition>

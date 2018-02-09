@@ -1,0 +1,30 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank lesspad">
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.mobile_range.detail.range_id']} (*)"/>
+        <h:outputText style="white-space: pre-wrap" value="#{mobile_rangeLazyService.selectedObject.range_id}"/>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.mobile_range.detail.prefix']}"/>
+        <h:outputText style="white-space: pre-wrap" value="#{mobile_rangeLazyService.selectedObject.prefix}"/>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.mobile_range.detail.network_operator']}"/>
+        <h:outputText style="white-space: pre-wrap" value="#{mobile_rangeLazyService.selectedObject.network_operator}"/>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.mobile_range.detail.start_number']}"/>
+        <h:outputText style="white-space: pre-wrap" value="#{mobile_rangeLazyService.selectedObject.start_number}"/>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.mobile_range.detail.stop_number']}"/>
+        <h:outputText style="white-space: pre-wrap" value="#{mobile_rangeLazyService.selectedObject.stop_number}"/>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.mobile_range.detail.state']}"/>
+        <h:outputText style="white-space: pre-wrap" value="#{mobile_rangeLazyService.selectedObject.state}"/>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.mobile_range.detail.created_time']}"/>
+        <h:outputText value="#{mobile_rangeLazyService.selectedObject.created_time}">
+            <f:convertDateTime type="date" timeZone="GMT+7" pattern="dd/MM/yyyy HH:mm:ss"/>
+        </h:outputText>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.mobile_range.detail.windows_size']}"/>
+        <h:outputText style="white-space: pre-wrap" value="#{mobile_rangeLazyService.selectedObject.windows_size}"/>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.mobile_range.detail.country_code']}"/>
+        <h:outputText style="white-space: pre-wrap" value="#{mobile_rangeLazyService.selectedObject.country_code}"/>
+
+    </p:panelGrid>
+</ui:composition>

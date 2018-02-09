@@ -1,0 +1,73 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <p:dataTable    value="#{client_topupLazyService.lazyModel}"  var="obj"   id="id_table_client_topup"  reflow="true"   widgetVar="dlgTableclient_topup"
+                    selection="#{client_topupLazyService.selectedObject}" lazy="true" rowKey="#{obj.topup_id}"  rows="20" paginator="true"
+                    emptyMessage="#{msg['obj.client_topup.general.listempty']}" resizableColumns="true" 
+                    paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                    rowsPerPageTemplate="10,20,30,40,50,60,70,80,90,100">
+        <f:facet name="header">
+
+        </f:facet>
+        <p:column style="text-align: left;" filterBy="#{obj.topup_id}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.client_topup.detail.topup_id']}
+            </f:facet>
+         <h:outputText style="white-space: pre-wrap" value="#{obj.topup_id}"/>
+        </p:column>
+<p:column style="text-align: left;" filterBy="#{obj.rate_id}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.client_topup.detail.rate_id']}
+            </f:facet>
+         <h:outputText style="white-space: pre-wrap" value="#{obj.rate_id}"/>
+        </p:column>
+<p:column style="text-align: left;" filterBy="#{obj.amount_money}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.client_topup.detail.amount_money']}
+            </f:facet>
+         <h:outputText style="white-space: pre-wrap" value="#{obj.amount_money}"/>
+        </p:column>
+<p:column style="text-align: left;" filterBy="#{obj.amount_uid}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.client_topup.detail.amount_uid']}
+            </f:facet>
+         <h:outputText style="white-space: pre-wrap" value="#{obj.amount_uid}"/>
+        </p:column>
+<p:column style="text-align: left;" filterBy="#{obj.topup_date}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.client_topup.detail.topup_date']}
+            </f:facet>
+         <h:outputText value="#{obj.topup_date}">
+  <f:convertDateTime type="date" timeZone="GMT+7" pattern="dd/MM/yyyy HH:mm:ss"/>
+  </h:outputText>
+        </p:column>
+<p:column style="text-align: left;" filterBy="#{obj.created_id}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.client_topup.detail.created_id']}
+            </f:facet>
+         <h:outputText style="white-space: pre-wrap" value="#{obj.created_id}"/>
+        </p:column>
+<p:column style="text-align: left;" filterBy="#{obj.client_id}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.client_topup.detail.client_id']}
+            </f:facet>
+         <h:outputText style="white-space: pre-wrap" value="#{obj.client_id}"/>
+        </p:column>
+
+        <p:column headerText="#{msg['general.control']}" style=" text-align: center">
+            <p:button icon="fa fa-search" outcome="view.html?id=#{obj.topup_id}"/>  
+            <p:button icon="fa fa-pencil" outcome="edit.html?id=#{obj.topup_id}"/>                          
+            <p:commandButton icon="fa fa-close"   action="#{client_topupLazyService.deleteObject}" update="id_table_client_topup" >
+                <f:setPropertyActionListener target="#{client_topupLazyService.selectedObject}" value="#{obj}"/>
+                <p:confirm header="#{msg['general.confirm']}" message="#{msg['general.confirm.description']}" icon="ui-icon-alert" />
+            </p:commandButton>
+        </p:column>
+        
+        <f:facet name="footer">
+
+        </f:facet>    
+    </p:dataTable>
+</ui:composition>

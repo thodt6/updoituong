@@ -1,0 +1,71 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <p:dataTable    value="#{groupLazyService.lazyModel}"  var="obj"   id="id_table_group"  reflow="true"   widgetVar="dlgTablegroup"
+                    selection="#{groupLazyService.selectedObject}" lazy="true" rowKey="#{obj.groupid}"  rows="20" paginator="true"
+                    emptyMessage="#{msg['obj.group.general.listempty']}" resizableColumns="true" sortBy="groupid" sortOrder="ascending"
+                    paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                    rowsPerPageTemplate="10,20,30,40,50,60,70,80,90,100">
+        <f:facet name="header">
+
+        </f:facet>
+        <p:column style="text-align: left;" width="8%" filterBy="#{obj.groupid}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.group.detail.groupid']}
+            </f:facet>
+            <h:outputText style="white-space: pre-wrap" value="#{obj.groupid}"/>            
+        </p:column>
+        <p:column style="text-align: left;" width="30%" filterBy="#{obj.name}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.group.detail.name']}
+            </f:facet>
+            <h:outputText style="white-space: pre-wrap" value="#{obj.name}"/>
+            <br/>
+            <h:outputText value="URI:#{obj.uri}"/>
+        </p:column>
+        <p:column style="text-align: left;" filterBy="#{obj.description}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.group.detail.description']}
+            </f:facet>
+            <h:outputText style="white-space: pre-wrap" value="#{obj.description}"/>
+        </p:column>
+        <p:column style="text-align: left;" filterBy="#{obj.created_time}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.group.detail.created_time']}
+            </f:facet>
+            <h:outputText value="#{obj.created_time}">
+                <f:convertDateTime type="date" timeZone="GMT+7" pattern="dd/MM/yyyy HH:mm:ss"/>
+            </h:outputText>
+        </p:column>
+        <p:column style="text-align: left;" filterBy="#{obj.modified_time}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.group.detail.modified_time']}
+            </f:facet>
+            <h:outputText value="#{obj.modified_time}">
+                <f:convertDateTime type="date" timeZone="GMT+7" pattern="dd/MM/yyyy HH:mm:ss"/>
+            </h:outputText>
+        </p:column>
+        <p:column style="text-align: left;" width="8%" filterBy="#{obj.created_id}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.group.detail.created_id']}
+            </f:facet>
+            <h:outputText style="white-space: pre-wrap" value="#{obj.created_id}"/>
+        </p:column>
+        <p:column headerText="#{msg['general.control']}" style=" text-align: center">
+            <p:button icon="fa fa-group" outcome="/portal/user/index.html?groupid=#{obj.groupid}"/>  
+            <p:button icon="fa fa-search" outcome="view.html?id=#{obj.groupid}"/>  
+            <p:button icon="fa fa-pencil" outcome="edit.html?id=#{obj.groupid}"/>                          
+            <p:commandButton icon="fa fa-close"   action="#{groupLazyService.deleteObject}" update="id_table_group" >
+                <f:setPropertyActionListener target="#{groupLazyService.selectedObject}" value="#{obj}"/>
+                <p:confirm header="#{msg['general.confirm']}" message="#{msg['general.confirm.description']}" icon="ui-icon-alert" />
+            </p:commandButton>
+        </p:column>
+
+        <f:facet name="footer">
+
+        </f:facet>    
+    </p:dataTable>
+</ui:composition>

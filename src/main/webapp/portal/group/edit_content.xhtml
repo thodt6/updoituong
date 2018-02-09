@@ -1,0 +1,38 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank lesspad">
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.group.detail.groupid']} (*)"/>
+        <p:outputPanel>
+            <p:inputNumber readonly="true" id="id_groupid" value="#{groupLazyService.selectedObject.groupid}" required="true" requiredMessage="#{msg['obj.group.detail.groupid.validateMsg']}" decimalPlaces="0">
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.group.detail.groupid.helpMsg']}"/>
+                <p:message id="msg_id_groupid" for="id_groupid"/>
+            </p:inputNumber>
+        </p:outputPanel>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.group.detail.name']} (*)"/>
+        <p:outputPanel>
+            <p:inputText  id="id_name" style="width:90%"  value="#{groupLazyService.selectedObject.name}" required="true" requiredMessage="#{msg['obj.group.detail.name.validateMsg']}">
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.group.detail.name.helpMsg']}"/>
+                <p:message id="msg_id_name" for="id_name"/>
+            </p:inputText>
+        </p:outputPanel>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.group.detail.description']} (*)"/>
+        <p:outputPanel>
+            <p:inputText  id="id_description" style="width:90%"  value="#{groupLazyService.selectedObject.description}" required="true" requiredMessage="#{msg['obj.group.detail.description.validateMsg']}">
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.group.detail.description.helpMsg']}"/>
+                <p:message id="msg_id_description" for="id_description"/>
+            </p:inputText>
+        </p:outputPanel>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.group.detail.uri']} (*)"/>
+        <p:outputPanel>
+            <p:inputText  id="id_uri" style="width:90%"  value="#{groupLazyService.selectedObject.uri}" required="true" requiredMessage="#{msg['obj.group.detail.uri.validateMsg']}">
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.group.detail.uri.helpMsg']}"/>
+                <p:message id="msg_id_uri" for="id_uri"/>
+            </p:inputText>
+        </p:outputPanel>
+
+    </p:panelGrid>
+</ui:composition>

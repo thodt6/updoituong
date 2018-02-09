@@ -1,0 +1,38 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank lesspad">
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.uid_rate.detail.name']} (*)"/>
+        <p:outputPanel>
+            <p:inputText  id="id_name" style="width:90%"  value="#{uid_rateLazyService.newObject.name}" required="true" requiredMessage="#{msg['obj.uid_rate.detail.name.validateMsg']}">
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.uid_rate.detail.name.helpMsg']}"/>
+                <p:message id="msg_id_name" for="id_name"/>
+            </p:inputText>
+        </p:outputPanel>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.uid_rate.detail.description']} (*)"/>
+        <p:outputPanel>
+            <p:inputTextarea  id="id_description" style="width:90%"  value="#{uid_rateLazyService.newObject.description}" required="true" requiredMessage="#{msg['obj.uid_rate.detail.description.validateMsg']}">
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.uid_rate.detail.description.helpMsg']}"/>
+                <p:message id="msg_id_description" for="id_description"/>
+            </p:inputTextarea>
+        </p:outputPanel>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.uid_rate.detail.value']} (*)"/>
+        <p:outputPanel>
+            <p:inputNumber  id="id_value" value="#{uid_rateLazyService.newObject.value}" required="true" requiredMessage="#{msg['obj.uid_rate.detail.value.validateMsg']}" decimalPlaces="0">
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.uid_rate.detail.value.helpMsg']}"/>
+                <p:message id="msg_id_value" for="id_value"/>
+            </p:inputNumber>
+        </p:outputPanel>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.uid_rate.detail.currency']}"/>
+        <p:outputPanel>
+            <p:inputText  id="id_currency" style="width:90%"  value="#{uid_rateLazyService.newObject.currency}">
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.uid_rate.detail.currency.helpMsg']}"/>
+                <p:message id="msg_id_currency" for="id_currency"/>
+            </p:inputText>
+        </p:outputPanel>
+
+    </p:panelGrid>
+</ui:composition>

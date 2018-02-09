@@ -1,0 +1,28 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank lesspad">
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.uid_rate.detail.rate_id']} (*)"/>
+        <h:outputText style="white-space: pre-wrap" value="#{uid_rateLazyService.selectedObject.rate_id}"/>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.uid_rate.detail.name']} (*)"/>
+        <h:outputText style="white-space: pre-wrap" value="#{uid_rateLazyService.selectedObject.name}"/>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.uid_rate.detail.description']} (*)"/>
+        <h:outputText style="white-space: pre-wrap" value="#{uid_rateLazyService.selectedObject.description}"/>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.uid_rate.detail.value']} (*)"/>
+        <h:outputText style="white-space: pre-wrap" value="#{uid_rateLazyService.selectedObject.value}"/>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.uid_rate.detail.active']}"/>
+        <h:outputText style="white-space: pre-wrap" value="#{uid_rateLazyService.selectedObject.active}"/>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.uid_rate.detail.update_time']}"/>
+        <h:outputText value="#{uid_rateLazyService.selectedObject.update_time}">
+            <f:convertDateTime type="date" timeZone="GMT+7" pattern="dd/MM/yyyy HH:mm:ss"/>
+        </h:outputText>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.uid_rate.detail.update_id']} (*)"/>
+        <h:outputText style="white-space: pre-wrap" value="#{uid_rateLazyService.selectedObject.update_id}"/>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.uid_rate.detail.currency']}"/>
+        <h:outputText style="white-space: pre-wrap" value="#{uid_rateLazyService.selectedObject.currency}"/>
+
+    </p:panelGrid>
+</ui:composition>

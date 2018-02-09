@@ -1,0 +1,126 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+    <f:metadata>        
+        <f:event type="preRenderView" listener="#{userSessionBean.verifyAccessPage}"/>
+    </f:metadata>
+    <ui:define name="title">Dashboard</ui:define>
+    <ui:define name="head">
+        <script type="text/javascript">
+            //<![CDATA[
+            function skinBar() {
+                this.cfg.shadow = false;
+                this.cfg.title = '';
+                this.cfg.seriesColors = ['#9fd037', '#f7cb00'];
+                this.cfg.grid = {
+                    background: '#ffffff',
+                    borderColor: '#ffffff',
+                    gridLineColor: '#dce2e7',
+                    shadow: false
+                };
+                this.cfg.axesDefaults = {
+                    borderWidth: 0.1,
+                    borderColor: 'dce2e7',
+                    rendererOptions: {
+                        textColor: '#2d353c'
+                    }
+                };
+                this.cfg.seriesDefaults = {
+                    shadow: false,
+                    lineWidth: 1,
+                    renderer: $.jqplot.BarRenderer,
+                    markerOptions: {
+                        shadow: false,
+                        size: 7,
+                        style: 'circle'
+                    }
+                }
+            }
+            //]]>  
+        </script>
+        <style type="text/css">
+            .main-content {
+                padding: 0;
+            }
+        </style>
+    </ui:define>
+
+    <ui:define name="content">
+        <div class="ui-g dashboard">            
+            <div class="ui-g-12 ui-md-6 ui-lg-4">
+                <div class="ui-g card overview-box overview-box-1">
+                    <div class="ui-g-4">
+                        <i class="fa fa-user-secret fa-4x"></i>
+                    </div>
+                    <div class="ui-g-8">
+                        <span class="overview-box-count">253</span>
+                        <span class="overview-box-name">customers</span>
+                    </div>
+                </div>
+            </div>
+            <div class="ui-g-12 ui-md-6 ui-lg-4">
+                <div class="ui-g card overview-box overview-box-2">
+                    <div class="ui-g-4">
+                        <i class="fa fa-dollar fa-4x"></i>
+                    </div>
+                    <div class="ui-g-8">
+                        <span class="overview-box-count">32161500</span>
+                        <span class="overview-box-name">VND</span>
+                    </div>
+                </div>
+            </div>
+            <div class="ui-g-12 ui-md-6 ui-lg-4">
+                <div class="ui-g card overview-box overview-box-3">
+                    <div class="ui-g-4">
+                        <i class="fa fa-asterisk fa-4x"></i>
+                    </div>
+                    <div class="ui-g-8">
+                        <span class="overview-box-count">428</span>
+                        <span class="overview-box-name">UID</span>
+                    </div>
+                </div>
+            </div>                       
+            <div class="ui-g-12 ui-md-8">
+                <div class="card">
+                    <h:form id="frmClient">
+                        <h3><b>#{msg['obj.client.general.list']}</b></h3>
+                        <ui:include src="client/index_content.xhtml"/>
+                    </h:form>
+                </div>
+            </div>
+            <div class="ui-g-12 ui-md-4">
+                <div class="card">
+                    <h:form id="frmTopup">
+                        <h3><b>Top up UID</b></h3>
+                        <p:panelGrid columns="2">
+                            <h:outputText style=" font-weight:  bolder" value="Client"/>
+                            <h:outputText value="#{clientLazyService.selectedObject.full_name}"/>
+                            <h:outputText style=" font-weight:  bolder" value="Client code"/>
+                            <h:outputText value="#{clientLazyService.selectedObject.user_code}"/>
+                            <h:outputText style=" font-weight:  bolder" value="UID Balance"/>
+                            <h:outputText value="#{clientLazyService.selectedObject.balance}"/>
+                            <h:outputText style=" font-weight:  bolder" value="Amount (VND)"/>
+                            <p:inputNumber decimalPlaces="0" value="#{clientLazyService.money}"/>
+                            <h:outputText style=" font-weight:  bolder" value="UID Rate"/>
+                            <h:outputText value="1 UID = #{clientLazyService.rate.value} #{clientLazyService.rate.currency}"/>
+
+                        </p:panelGrid>
+                        <p:separator/>
+                        <p:messages id="msg" closable="true"/>
+                        <p:commandButton value="Top Up" icon="fa fa-dollar" action="#{clientLazyService.doTopup}" update=":frmClient,:frmTopup">
+                            <p:confirm header="#{msg['general.confirm']}" message="#{msg['general.confirm.description']}" icon="ui-icon-alert" />
+                        </p:commandButton>
+                    </h:form>
+                </div>
+            </div>
+            <p:confirmDialog global="true"  id="id_dlgConfirm" showEffect="fade" hideEffect="explode">
+                <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+            </p:confirmDialog>   
+        </div>
+    </ui:define>
+
+</ui:composition>

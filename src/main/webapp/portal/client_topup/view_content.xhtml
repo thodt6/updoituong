@@ -1,0 +1,26 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank lesspad">
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.client_topup.detail.topup_id']} (*)"/>
+<h:outputText style="white-space: pre-wrap" value="#{client_topupLazyService.selectedObject.topup_id}"/>
+<h:outputLabel style="font-weight:bolder" value="#{msg['obj.client_topup.detail.rate_id']} (*)"/>
+<h:outputText style="white-space: pre-wrap" value="#{client_topupLazyService.selectedObject.rate_id}"/>
+<h:outputLabel style="font-weight:bolder" value="#{msg['obj.client_topup.detail.amount_money']} (*)"/>
+<h:outputText style="white-space: pre-wrap" value="#{client_topupLazyService.selectedObject.amount_money}"/>
+<h:outputLabel style="font-weight:bolder" value="#{msg['obj.client_topup.detail.amount_uid']} (*)"/>
+<h:outputText style="white-space: pre-wrap" value="#{client_topupLazyService.selectedObject.amount_uid}"/>
+<h:outputLabel style="font-weight:bolder" value="#{msg['obj.client_topup.detail.topup_date']}"/>
+<h:outputText value="#{client_topupLazyService.selectedObject.topup_date}">
+  <f:convertDateTime type="date" timeZone="GMT+7" pattern="dd/MM/yyyy HH:mm:ss"/>
+  </h:outputText>
+<h:outputLabel style="font-weight:bolder" value="#{msg['obj.client_topup.detail.created_id']} (*)"/>
+<h:outputText style="white-space: pre-wrap" value="#{client_topupLazyService.selectedObject.created_id}"/>
+<h:outputLabel style="font-weight:bolder" value="#{msg['obj.client_topup.detail.client_id']} (*)"/>
+<h:outputText style="white-space: pre-wrap" value="#{client_topupLazyService.selectedObject.client_id}"/>
+
+    </p:panelGrid>
+</ui:composition>

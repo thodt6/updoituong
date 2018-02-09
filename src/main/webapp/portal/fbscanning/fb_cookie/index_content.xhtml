@@ -1,0 +1,64 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <p:dataTable    value="#{fb_cookieLazyService.lazyModel}"  var="obj"   id="id_table_fb_cookie"  reflow="true"   widgetVar="dlgTablefb_cookie"
+                    selection="#{fb_cookieLazyService.selectedObject}" lazy="true" rowKey="#{obj.fbid}"  rows="20" paginator="true"
+                    emptyMessage="#{msg['obj.fb_cookie.general.listempty']}" resizableColumns="true"  paginatorPosition="bottom"
+                    paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                    rowsPerPageTemplate="10,20,30,40,50,60,70,80,90,100">
+        <f:facet name="header">
+
+        </f:facet>
+        <p:column style="text-align: left;" filterBy="#{obj.fbid}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.fb_cookie.detail.fbid']}
+            </f:facet>
+            <h:outputText style="white-space: pre-wrap" value="#{obj.fbid}"/>
+        </p:column>
+        <p:column style="text-align: left;" filterBy="#{obj.name}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.fb_cookie.detail.name']}
+            </f:facet>
+            <h:outputText style="white-space: pre-wrap" value="#{obj.name}"/>
+        </p:column>
+        <p:column style="text-align: left;" filterBy="#{obj.cookie}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.fb_cookie.detail.cookie']}
+            </f:facet>
+            <h:outputText style="white-space: pre-wrap" value="#{obj.cookie}"/>
+        </p:column>
+        <p:column style="text-align: left;" filterBy="#{obj.createdtime}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.fb_cookie.detail.createdtime']}
+            </f:facet>
+            <h:outputText value="#{obj.createdtime}">
+                <f:convertDateTime type="date" timeZone="GMT+7" pattern="dd/MM/yyyy HH:mm:ss"/>
+            </h:outputText>
+        </p:column>
+        <p:column style="text-align: left;" filterBy="#{obj.state}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.fb_cookie.detail.state']}
+            </f:facet>
+            <h:outputText style="white-space: pre-wrap" value="#{obj.state}"/>
+        </p:column>
+
+        <p:column headerText="#{msg['general.control']}" style=" text-align: center">
+            <p:button icon="fa fa-search" outcome="view.html?id=#{obj.fbid}"/>  
+            <p:button icon="fa fa-pencil" outcome="edit.html?id=#{obj.fbid}"/>                          
+            <p:commandButton icon="fa fa-close"   action="#{fb_cookieLazyService.deleteObject}" update="id_table_fb_cookie" >
+                <f:setPropertyActionListener target="#{fb_cookieLazyService.selectedObject}" value="#{obj}"/>
+                <p:confirm header="#{msg['general.confirm']}" message="#{msg['general.confirm.description']}" icon="ui-icon-alert" />
+            </p:commandButton>
+            <p:commandButton value="Test Cookie"   oncomplete="PF('dlgTest').show();"  update=":frmTest" >
+                <f:setPropertyActionListener target="#{fb_cookieLazyService.selectedObject}" value="#{obj}"/>               
+            </p:commandButton>
+        </p:column>
+
+        <f:facet name="footer">
+
+        </f:facet>    
+    </p:dataTable>
+</ui:composition>

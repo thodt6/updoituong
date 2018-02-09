@@ -1,0 +1,17 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+    <p:growl id="growl"/>
+    <p:tree id="id_module" selectionMode="single" selection="#{siteController.selectedNode}" orientation="horizontal"
+            value="#{siteController.root}" var="node" >
+        <p:ajax  event="select" listener="#{siteController.onNodeSelect}"  update=":frmPermission:id_permission"/>
+        <p:treeNode expandedIcon="ui-icon-folder-open" collapsedIcon="ui-icon-folder-collapsed">
+            <h:outputText  id="id_uri" value="#{node.name}" />
+        </p:treeNode>
+        <p:treeNode type="file" icon="ui-icon-document" >
+            <h:outputText  id="id_uri1" value="#{node.name}" />
+        </p:treeNode>                               
+    </p:tree>  
+</ui:composition>

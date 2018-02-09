@@ -1,0 +1,59 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank lesspad">
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.client_topup.detail.topup_id']} (*)"/>
+<p:outputPanel>
+   <p:inputNumber readonly="true" id="id_topup_id" value="#{client_topupLazyService.newObject.topup_id}" required="true" requiredMessage="#{msg['obj.client_topup.detail.topup_id.validateMsg']}" decimalPlaces="0">
+   <h:outputLabel style="font-weight:bolder" value="#{msg['obj.client_topup.detail.topup_id.helpMsg']}"/>
+   <p:message id="msg_id_topup_id" for="id_topup_id"/>
+   </p:inputNumber>
+</p:outputPanel>
+<h:outputLabel style="font-weight:bolder" value="#{msg['obj.client_topup.detail.rate_id']} (*)"/>
+<p:outputPanel>
+   <p:inputNumber  id="id_rate_id" value="#{client_topupLazyService.newObject.rate_id}" required="true" requiredMessage="#{msg['obj.client_topup.detail.rate_id.validateMsg']}" decimalPlaces="0">
+   <h:outputLabel style="font-weight:bolder" value="#{msg['obj.client_topup.detail.rate_id.helpMsg']}"/>
+   <p:message id="msg_id_rate_id" for="id_rate_id"/>
+   </p:inputNumber>
+</p:outputPanel>
+<h:outputLabel style="font-weight:bolder" value="#{msg['obj.client_topup.detail.amount_money']} (*)"/>
+<p:outputPanel>
+   <p:inputNumber  id="id_amount_money" value="#{client_topupLazyService.newObject.amount_money}" required="true" requiredMessage="#{msg['obj.client_topup.detail.amount_money.validateMsg']}" decimalPlaces="0">
+   <h:outputLabel style="font-weight:bolder" value="#{msg['obj.client_topup.detail.amount_money.helpMsg']}"/>
+   <p:message id="msg_id_amount_money" for="id_amount_money"/>
+   </p:inputNumber>
+</p:outputPanel>
+<h:outputLabel style="font-weight:bolder" value="#{msg['obj.client_topup.detail.amount_uid']} (*)"/>
+<p:outputPanel>
+   <p:inputNumber  id="id_amount_uid" value="#{client_topupLazyService.newObject.amount_uid}" required="true" requiredMessage="#{msg['obj.client_topup.detail.amount_uid.validateMsg']}" decimalPlaces="0">
+   <h:outputLabel style="font-weight:bolder" value="#{msg['obj.client_topup.detail.amount_uid.helpMsg']}"/>
+   <p:message id="msg_id_amount_uid" for="id_amount_uid"/>
+   </p:inputNumber>
+</p:outputPanel>
+<h:outputLabel style="font-weight:bolder" value="#{msg['obj.client_topup.detail.topup_date']}"/>
+<p:outputPanel>
+   <p:calendar  id="id_topup_date" value="#{client_topupLazyService.newObject.topup_date}" pattern="dd/MM/yyyy HH:mm:ss">
+   <h:outputLabel style="font-weight:bolder" value="#{msg['obj.client_topup.detail.topup_date.helpMsg']}"/>
+   <p:message id="msg_id_topup_date" for="id_topup_date"/>
+   </p:calendar>
+</p:outputPanel>
+<h:outputLabel style="font-weight:bolder" value="#{msg['obj.client_topup.detail.created_id']} (*)"/>
+<p:outputPanel>
+   <p:inputNumber  id="id_created_id" value="#{client_topupLazyService.newObject.created_id}" required="true" requiredMessage="#{msg['obj.client_topup.detail.created_id.validateMsg']}" decimalPlaces="0">
+   <h:outputLabel style="font-weight:bolder" value="#{msg['obj.client_topup.detail.created_id.helpMsg']}"/>
+   <p:message id="msg_id_created_id" for="id_created_id"/>
+   </p:inputNumber>
+</p:outputPanel>
+<h:outputLabel style="font-weight:bolder" value="#{msg['obj.client_topup.detail.client_id']} (*)"/>
+<p:outputPanel>
+   <p:inputText  id="id_client_id" style="width:90%"  value="#{client_topupLazyService.newObject.client_id}" required="true" requiredMessage="#{msg['obj.client_topup.detail.client_id.validateMsg']}">
+   <h:outputLabel style="font-weight:bolder" value="#{msg['obj.client_topup.detail.client_id.helpMsg']}"/>
+   <p:message id="msg_id_client_id" for="id_client_id"/>
+   </p:inputText>
+</p:outputPanel>
+
+    </p:panelGrid>
+</ui:composition>

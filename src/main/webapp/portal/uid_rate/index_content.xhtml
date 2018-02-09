@@ -1,0 +1,82 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <p:dataTable    value="#{uid_rateLazyService.lazyModel}"  var="obj"   id="id_table_uid_rate"  reflow="true"   widgetVar="dlgTableuid_rate"
+                    selection="#{uid_rateLazyService.selectedObject}" lazy="true" rowKey="#{obj.rate_id}"  rows="20" paginator="true"
+                    emptyMessage="#{msg['obj.uid_rate.general.listempty']}" resizableColumns="true" paginatorPosition="bottom" sortBy="active" sortOrder="descending" 
+                    paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                    rowsPerPageTemplate="10,20,30,40,50,60,70,80,90,100">
+        <f:facet name="header">
+
+        </f:facet>
+        <p:column style="text-align: left;" filterBy="#{obj.rate_id}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.uid_rate.detail.rate_id']}
+            </f:facet>
+            <h:outputText style="white-space: pre-wrap" value="#{obj.rate_id}"/>
+        </p:column>
+        <p:column style="text-align: left;" filterBy="#{obj.name}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.uid_rate.detail.name']}
+            </f:facet>
+            <h:outputText style="white-space: pre-wrap" value="#{obj.name}"/>
+        </p:column>
+        <p:column style="text-align: left;" filterBy="#{obj.description}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.uid_rate.detail.description']}
+            </f:facet>
+            <h:outputText style="white-space: pre-wrap" value="#{obj.description}"/>
+        </p:column>
+        <p:column style="text-align: left;" filterBy="#{obj.value}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.uid_rate.detail.value']}
+            </f:facet>
+            <h:outputText style="white-space: pre-wrap" value="#{obj.value}"/>
+        </p:column>
+        <p:column style="text-align: left;" >
+            <f:facet name="header">
+                #{msg['obj.uid_rate.detail.active']}
+            </f:facet>
+            <p:button style="width:80%" icon="fa fa-flag" value="#{msg['general.active']}" rendered="#{obj.active==1}" styleClass="green-btn" onclick="return false;"/>                                 
+            <p:commandButton style="width:80%" icon="fa fa-frown-o" value="#{msg['general.activate']}" rendered="#{obj.active==0}" action="#{uid_rateLazyService.activateRate}" update="id_table_uid_rate" styleClass="purple-btn">
+                <f:setPropertyActionListener value="#{obj}" target="#{uid_rateLazyService.selectedObject}"/>
+            </p:commandButton>
+        </p:column>
+        <p:column style="text-align: left;" filterBy="#{obj.update_time}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.uid_rate.detail.update_time']}
+            </f:facet>
+            <h:outputText value="#{obj.update_time}">
+                <f:convertDateTime type="date" timeZone="GMT+7" pattern="dd/MM/yyyy HH:mm:ss"/>
+            </h:outputText>
+        </p:column>
+        <p:column style="text-align: left;" filterBy="#{obj.update_id}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.uid_rate.detail.update_id']}
+            </f:facet>
+            <h:outputText style="white-space: pre-wrap" value="#{obj.update_id}"/>
+        </p:column>
+        <p:column style="text-align: left;" filterBy="#{obj.currency}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.uid_rate.detail.currency']}
+            </f:facet>
+            <h:outputText style="white-space: pre-wrap" value="#{obj.currency}"/>
+        </p:column>
+
+        <p:column headerText="#{msg['general.control']}" style=" text-align: center">
+            <p:button icon="fa fa-search" outcome="view.html?id=#{obj.rate_id}"/>  
+            <p:button icon="fa fa-pencil" outcome="edit.html?id=#{obj.rate_id}"/>                          
+            <p:commandButton icon="fa fa-close"   action="#{uid_rateLazyService.deleteObject}" update="id_table_uid_rate" >
+                <f:setPropertyActionListener target="#{uid_rateLazyService.selectedObject}" value="#{obj}"/>
+                <p:confirm header="#{msg['general.confirm']}" message="#{msg['general.confirm.description']}" icon="ui-icon-alert" />
+            </p:commandButton>
+        </p:column>
+
+        <f:facet name="footer">
+
+        </f:facet>    
+    </p:dataTable>
+</ui:composition>

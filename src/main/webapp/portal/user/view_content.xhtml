@@ -1,0 +1,66 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank lesspad">
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.id']} (*)"/>
+        <h:outputText style="white-space: pre-wrap" value="#{userLazyService.selectedObject.userid}"/>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.oauth_provider']} (*)"/>
+        <h:outputText style="white-space: pre-wrap" value="#{userLazyService.selectedObject.oauth_provider}"/>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.uid']}"/>
+        <h:outputText style="white-space: pre-wrap" value="#{userLazyService.selectedObject.uid}"/>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.username']}"/>
+        <h:outputText style="white-space: pre-wrap" value="#{userLazyService.selectedObject.username}"/>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.password_hash']}"/>
+        <h:outputText style="white-space: pre-wrap" value="#{userLazyService.selectedObject.password_hash}"/>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.email']}"/>
+        <h:outputText style="white-space: pre-wrap" value="#{userLazyService.selectedObject.email}"/>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.phone']}"/>
+        <h:outputText style="white-space: pre-wrap" value="#{userLazyService.selectedObject.phone}"/>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.first_name']}"/>
+        <h:outputText style="white-space: pre-wrap" value="#{userLazyService.selectedObject.first_name}"/>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.last_name']}"/>
+        <h:outputText style="white-space: pre-wrap" value="#{userLazyService.selectedObject.last_name}"/>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.gender']}"/>
+        <h:outputText style="white-space: pre-wrap" value="#{userLazyService.selectedObject.gender}"/>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.picture']}"/>
+        <h:graphicImage value="#{userLazyService.selectedObject.fullPictureUrl}" width="200"/>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.country_code']}"/>
+        <h:outputText style="white-space: pre-wrap" value="#{userLazyService.selectedObject.country_code}"/>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.state']}"/>
+        <h:outputText style="white-space: pre-wrap" value="#{userLazyService.selectedObject.state}"/>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.city']}"/>
+        <h:outputText style="white-space: pre-wrap" value="#{userLazyService.selectedObject.city}"/>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.post_code']}"/>
+        <h:outputText style="white-space: pre-wrap" value="#{userLazyService.selectedObject.post_code}"/>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.created_time']}"/>
+        <h:outputText value="#{userLazyService.selectedObject.created_time}">
+            <f:convertDateTime type="date" timeZone="GMT+7" pattern="dd/MM/yyyy HH:mm:ss"/>
+        </h:outputText>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.modified_time']}"/>
+        <h:outputText value="#{userLazyService.selectedObject.modified_time}">
+            <f:convertDateTime type="date" timeZone="GMT+7" pattern="dd/MM/yyyy HH:mm:ss"/>
+        </h:outputText>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.last_login']}"/>
+        <h:outputText value="#{userLazyService.selectedObject.last_login}">
+            <f:convertDateTime type="date" timeZone="GMT+7" pattern="dd/MM/yyyy HH:mm:ss"/>
+        </h:outputText>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.last_logout']}"/>
+        <h:outputText value="#{userLazyService.selectedObject.last_logout}">
+            <f:convertDateTime type="date" timeZone="GMT+7" pattern="dd/MM/yyyy HH:mm:ss"/>
+        </h:outputText>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.status']}"/>
+        <h:outputText style="white-space: pre-wrap" value="#{userLazyService.selectedObject.status}"/>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.login_token']}"/>
+        <h:outputText style="white-space: pre-wrap" value="#{userLazyService.selectedObject.login_token}"/>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.expired_time']}"/>
+        <h:outputText style="white-space: pre-wrap" value="#{userLazyService.selectedObject.expired_time}"/>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.password_reset_token']}"/>
+        <h:outputText style="white-space: pre-wrap" value="#{userLazyService.selectedObject.password_reset_token}"/>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.user.detail.application_id']}"/>
+        <h:outputText style="white-space: pre-wrap" value="#{userLazyService.selectedObject.application_id}"/>
+
+    </p:panelGrid>
+</ui:composition>

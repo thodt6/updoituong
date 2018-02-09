@@ -1,0 +1,51 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+    <f:metadata>        
+        <!--<f:event type="preRenderView" listener="#{userSessionBean.verifyAccessPage}"/>-->
+    </f:metadata>
+    <ui:define name="head">
+
+    </ui:define>
+    <ui:define name="title">Site Permission Setting</ui:define>
+    <ui:define name="viewname">Site Permission Setting</ui:define>
+    <ui:define name="content">
+        <div class="ui-g">
+            <div class="ui-g-12 ui-lg-12">
+                <p:panel>                        
+                    <div style=" float:  right">                        
+                        <p:button icon="fa fa-close"/>                          
+                    </div>                        
+                    <div style=" float: left">                        
+                        Site Permission Setting
+                    </div>
+                    <br/>
+                    <br/>
+                    <p:separator/>
+                    <div class="ui-g">
+                        <div class="ui-g-12 ui-lg-9">
+                            <h:form id="frmObject">
+                                <ui:include src="index_content.xhtml"/>
+                            </h:form>
+                        </div>        
+                        <div class="ui-g-12 ui-lg-3">
+                            <h:form id="frmPermission">
+                                <p:growl id="growl"/>
+                                <p:panel id="id_permission" header="Group Permission">
+                                    <p:selectManyMenu filter="true" filterMatchMode="contains" style="width:95%"  value="#{siteController.selectedGroups}"  converter="group" showCheckbox="true" >
+                                        <f:selectItems value="#{siteController.allGroup}" var="group" itemLabel="#{group.name}" itemValue="#{group}"/>
+                                    </p:selectManyMenu>
+                                    <br/>
+                                    <p:commandButton value="#{msg['general.update']}" action="#{siteController.setPermission}" update="growl"/>
+                                </p:panel>    
+                            </h:form>
+                        </div>
+                    </div>
+                </p:panel>                     
+            </div>
+        </div> 
+    </ui:define>
+</ui:composition>

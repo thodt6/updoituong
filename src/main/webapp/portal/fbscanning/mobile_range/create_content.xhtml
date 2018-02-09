@@ -1,0 +1,74 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank lesspad">
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.mobile_range.detail.range_id']} (*)"/>
+        <p:outputPanel>
+            <p:inputNumber readonly="true" id="id_range_id" value="#{mobile_rangeLazyService.newObject.range_id}" required="true" requiredMessage="#{msg['obj.mobile_range.detail.range_id.validateMsg']}" decimalPlaces="0">
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.mobile_range.detail.range_id.helpMsg']}"/>
+                <p:message id="msg_id_range_id" for="id_range_id"/>
+            </p:inputNumber>
+        </p:outputPanel>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.mobile_range.detail.prefix']}"/>
+        <p:outputPanel>
+            <p:inputText  id="id_prefix" style="width:90%"  value="#{mobile_rangeLazyService.newObject.prefix}">
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.mobile_range.detail.prefix.helpMsg']}"/>
+                <p:message id="msg_id_prefix" for="id_prefix"/>
+            </p:inputText>
+        </p:outputPanel>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.mobile_range.detail.network_operator']}"/>
+        <p:outputPanel>
+            <p:inputText  id="id_network_operator" style="width:90%"  value="#{mobile_rangeLazyService.newObject.network_operator}">
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.mobile_range.detail.network_operator.helpMsg']}"/>
+                <p:message id="msg_id_network_operator" for="id_network_operator"/>
+            </p:inputText>
+        </p:outputPanel>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.mobile_range.detail.start_number']}"/>
+        <p:outputPanel>
+            <p:inputText  id="id_start_number" style="width:90%"  value="#{mobile_rangeLazyService.newObject.start_number}">
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.mobile_range.detail.start_number.helpMsg']}"/>
+                <p:message id="msg_id_start_number" for="id_start_number"/>
+            </p:inputText>
+        </p:outputPanel>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.mobile_range.detail.stop_number']}"/>
+        <p:outputPanel>
+            <p:inputText  id="id_stop_number" style="width:90%"  value="#{mobile_rangeLazyService.newObject.stop_number}">
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.mobile_range.detail.stop_number.helpMsg']}"/>
+                <p:message id="msg_id_stop_number" for="id_stop_number"/>
+            </p:inputText>
+        </p:outputPanel>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.mobile_range.detail.state']}"/>
+        <p:outputPanel>
+            <p:selectOneMenu disabled="true" value="#{mobile_rangeLazyService.newObject.state}">
+                <f:selectItem itemLabel="Task Undelivered" itemValue="U"/>
+                <f:selectItem itemLabel="Ready Task" itemValue="R"/>
+                <f:selectItem itemLabel="Doing" itemValue="D"/>
+                <f:selectItem itemLabel="Completed" itemValue="C"/>
+                <f:selectItem itemLabel="Redo" itemValue="T"/>                
+            </p:selectOneMenu>
+        </p:outputPanel>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.mobile_range.detail.created_time']}"/>
+        <p:outputPanel>
+            <p:calendar  id="id_created_time" value="#{mobile_rangeLazyService.newObject.created_time}" pattern="dd/MM/yyyy HH:mm:ss">
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.mobile_range.detail.created_time.helpMsg']}"/>
+                <p:message id="msg_id_created_time" for="id_created_time"/>
+            </p:calendar>
+        </p:outputPanel>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.mobile_range.detail.windows_size']}"/>
+        <p:outputPanel>
+            <p:inputNumber  id="id_windows_size" value="#{mobile_rangeLazyService.newObject.windows_size}" decimalPlaces="0">
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.mobile_range.detail.windows_size.helpMsg']}"/>
+                <p:message id="msg_id_windows_size" for="id_windows_size"/>
+            </p:inputNumber>
+        </p:outputPanel>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.mobile_range.detail.country_code']}"/>
+        <p:outputPanel>
+            <p:selectOneMenu value="#{mobile_rangeLazyService.newObject.country_code}">
+                <f:selectItems value="#{countryService.objects}" var="country" itemValue="#{country.code}" itemLabel="#{country.name}"/>
+            </p:selectOneMenu>
+        </p:outputPanel>
+    </p:panelGrid>
+</ui:composition>

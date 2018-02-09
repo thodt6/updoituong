@@ -1,0 +1,30 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank lesspad">
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.appclient.detail.clientid']} (*)"/>
+        <h:outputText style="white-space: pre-wrap" value="#{appclientLazyService.selectedObject.clientid}"/>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.appclient.detail.name']}"/>
+        <h:outputText style="white-space: pre-wrap" value="#{appclientLazyService.selectedObject.name}"/>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.appclient.detail.ipaddress']}"/>
+        <h:outputText style="white-space: pre-wrap" value="#{appclientLazyService.selectedObject.ipaddress}"/>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.appclient.detail.online_time']}"/>
+        <h:outputText value="#{appclientLazyService.selectedObject.online_time}">
+            <f:convertDateTime type="date" timeZone="GMT+7" pattern="dd/MM/yyyy HH:mm:ss"/>
+        </h:outputText>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.appclient.detail.created_time']}"/>
+        <h:outputText value="#{appclientLazyService.selectedObject.created_time}">
+            <f:convertDateTime type="date" timeZone="GMT+7" pattern="dd/MM/yyyy HH:mm:ss"/>
+        </h:outputText>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.appclient.detail.last_request_time']}"/>
+        <h:outputText value="#{appclientLazyService.selectedObject.last_request_time}">
+            <f:convertDateTime type="date" timeZone="GMT+7" pattern="dd/MM/yyyy HH:mm:ss"/>
+        </h:outputText>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.appclient.detail.last_request_event']}"/>
+        <h:outputText style="white-space: pre-wrap" value="#{appclientLazyService.selectedObject.last_request_event}"/>
+
+    </p:panelGrid>
+</ui:composition>

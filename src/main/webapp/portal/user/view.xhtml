@@ -1,0 +1,55 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+    <f:metadata>       
+        <f:event type="preRenderView" listener="#{userSessionBean.verifyAccessPage}"/>
+        <f:viewParam id="id" name="id" value="#{userLazyService.selectedId}"/>
+        <f:event type="preRenderView" listener="#{userLazyService.initSelectedObject}"/>
+    </f:metadata>
+    <ui:define name="title">#{msg['obj.user.general']}</ui:define>
+    <ui:define name="viewname">#{msg['obj.user.general']} / #{userLazyService.selectedObject.id}</ui:define>
+    <ui:define name="content">
+        <div class="ui-g">
+            <div class="ui-g-12 ui-lg-12">
+                <p:panel>                        
+                    <div style=" float:  right">                        
+                        <p:button icon="fa fa-close" outcome="index.html"/>                          
+                    </div>                        
+                    <div style=" float: left">
+                        <i class="fa fa-fw fa-info"/>
+                        <p:spacer width="10"/>
+                        #{msg['obj.user.general']} / #{userLazyService.selectedObject.id}
+                    </div>
+                    <br/>
+                    <br/>
+                    <p:separator/>
+                    <h:form id="frmObject">
+                        <p:messages id="id_msg" closable="true"/>
+                        <div class="ui-g">
+                            <div class="ui-g-12 ui-lg-8">
+                                <p:panel>
+                                    <ui:include src="view_content.xhtml"/>
+                                </p:panel>
+                                <br/>
+                                <div style="float: right;">
+                                    <p:button icon="fa fa-arrow-left"  value="#{msg['general.back']}" outcome="index.html"/>
+                                </div>                               
+                            </div>
+                            <div class="ui-g-12 ui-lg-4">
+                                <p:panel>
+                                    <div class="card">
+                                        <i class="fa fa-lightbulb-o fa-2x"/>
+                                        <p><h:outputText escape="false" value="#{msg['obj.user.general.help']}"/></p>
+                                    </div>
+                                </p:panel>
+                            </div>
+                        </div>
+                    </h:form>
+                </p:panel>                    
+            </div>
+        </div> 
+    </ui:define>
+</ui:composition>

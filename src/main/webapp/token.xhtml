@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:metadata>       
+        <f:viewParam id="token_id" name="token_id" value="#{tokenService.token_id}"/>
+        <f:event type="preRenderView" listener="#{tokenService.initSelectedObject}"/>
+    </f:metadata>
+    <script>
+        function myFunction() {
+            var copyText = document.getElementById("id_token");
+            copyText.select();
+            document.execCommand("Copy");
+        }
+    </script>
+    <h:head>
+        <f:facet name="first">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+            <meta name="apple-mobile-web-app-capable" content="yes" />
+        </f:facet>
+        <title>SieuTarget Token</title>
+    </h:head>
+    <f:view locale="vi">
+        <h:body styleClass="login-body">
+            <div class="ui-g">
+                <div class="ui-g-12">
+                    <div class="card">
+                        <p:graphicImage value="#{tokenService.url}" />
+                        <h2>#{tokenService.name}</h2>
+                        <h1>Facebook token</h1>                
+                        <p:inputTextarea id="id_token" style=" width: 90%"  readonly="true" value="#{tokenService.token}"/>          
+                        <p:button icon="fa fa-copy" value="Copy" onclick="myFunction();"/>
+                    </div>
+                </div>
+            </div>
+
+            <h:outputStylesheet name="css/layout-green.css" library="verona-layout" />
+        </h:body>
+    </f:view>
+</html>

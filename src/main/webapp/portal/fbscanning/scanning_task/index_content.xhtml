@@ -1,0 +1,104 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+    
+
+    <p:dataTable    value="#{scanning_taskLazyService.lazyModel}"  var="obj"   id="id_table_scanning_task"  reflow="true"   widgetVar="dlgTablescanning_task"
+                    selection="#{scanning_taskLazyService.selectedObject}" lazy="true" rowKey="#{obj.taskid}"  rows="20" paginator="true"
+                    emptyMessage="#{msg['obj.scanning_task.general.listempty']}" resizableColumns="true" 
+                    paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                    rowsPerPageTemplate="10,20,30,40,50,60,70,80,90,100">
+        <f:facet name="header">
+
+        </f:facet>
+        <p:column style="text-align: left;" filterBy="#{obj.taskid}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.scanning_task.detail.taskid']}
+            </f:facet>
+            <h:outputText style="white-space: pre-wrap" value="#{obj.taskid}"/>
+        </p:column>
+        <p:column style="text-align: left;" filterBy="#{obj.client_id}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.scanning_task.detail.client_id']}
+            </f:facet>
+            <h:outputText style="white-space: pre-wrap" value="#{obj.client_id}"/>
+        </p:column>
+        <p:column style="text-align: left;" filterBy="#{obj.start_time}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.scanning_task.detail.start_time']}
+            </f:facet>
+            <h:outputText value="#{obj.start_time}">
+                <f:convertDateTime type="date" timeZone="GMT+7" pattern="dd/MM/yyyy HH:mm:ss"/>
+            </h:outputText>
+        </p:column>
+        <p:column style="text-align: left;" filterBy="#{obj.state}" filterMatchMode="exact" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.scanning_task.detail.state']}
+            </f:facet>
+            <f:facet name="filter">
+                <p:selectOneMenu onchange="PF('dlgTablescanning_task').filter()" >
+                    <f:selectItem itemLabel="Select One" itemValue="#{null}" noSelectionOption="true" />
+                    <f:selectItem itemLabel="Not assigned" itemValue="U"/>
+                    <f:selectItem itemLabel="Running" itemValue="A"/>
+                    <f:selectItem itemLabel="Completed" itemValue="C"/>
+                    <f:selectItem itemLabel="Re Assigned" itemValue="R"/>
+                </p:selectOneMenu>
+            </f:facet>
+            <h:outputText style="white-space: pre-wrap" value="Not assinged" rendered="#{obj.state =='U'}"/>  
+            <h:outputText style="white-space: pre-wrap" value="Running" rendered="#{obj.state =='A'}"/>  
+            <h:outputText style="white-space: pre-wrap" value="Completed" rendered="#{obj.state =='C'}"/>  
+            <h:outputText style="white-space: pre-wrap" value="Re Assigned" rendered="#{obj.state =='R'}"/>              
+        </p:column>
+        <p:column style="text-align: left;" filterBy="#{obj.range_id}" filterMatchMode="exact" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.scanning_task.detail.range_id']}
+            </f:facet>
+            <f:facet name="filter">
+                <p:selectOneMenu onchange="PF('dlgTablescanning_task').filter()" >
+                    <f:selectItem itemLabel="Select One" itemValue="#{null}" noSelectionOption="true" />
+                    <f:selectItems value="#{mobile_rangeService.objects}" var="s" itemLabel="#{s.country_code}-#{s.prefix}-#{s.network_operator}" itemValue="#{s.range_id}"/>
+                </p:selectOneMenu>
+            </f:facet>
+            <h:outputText style="white-space: pre-wrap" value="#{obj.range_id}"/>
+        </p:column>
+        <p:column style="text-align: left;" filterBy="#{obj.start_position}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.scanning_task.detail.start_position']}
+            </f:facet>
+            <h:outputText style="white-space: pre-wrap" value="#{obj.start_position}"/>
+        </p:column>
+        <p:column style="text-align: left;" filterBy="#{obj.stop_position}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.scanning_task.detail.stop_position']}
+            </f:facet>
+            <h:outputText style="white-space: pre-wrap" value="#{obj.stop_position}"/>
+        </p:column>
+        <p:column style="text-align: left;" filterBy="#{obj.current_pos}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.scanning_task.detail.current_pos']}
+            </f:facet>
+            <h:outputText style="white-space: pre-wrap" value="#{obj.current_pos}"/>
+            <p:button onclick="return false;" value="#{obj.percentage}%"/>
+        </p:column>
+        <p:column style="text-align: left;" filterBy="#{obj.total_result}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.scanning_task.detail.total_result']}
+            </f:facet>
+            <h:outputText style="white-space: pre-wrap" value="#{obj.total_result}"/>
+        </p:column>
+
+        <p:column headerText="#{msg['general.control']}" style=" text-align: center">
+            <p:button icon="fa fa-search" outcome="view.html?id=#{obj.taskid}"/>  
+            <p:commandButton icon="fa fa-close"   action="#{scanning_taskLazyService.deleteObject}" update="id_table_scanning_task" >
+                <f:setPropertyActionListener target="#{scanning_taskLazyService.selectedObject}" value="#{obj}"/>
+                <p:confirm header="#{msg['general.confirm']}" message="#{msg['general.confirm.description']}" icon="ui-icon-alert" />
+            </p:commandButton>            
+        </p:column>
+
+        <f:facet name="footer">
+
+        </f:facet>    
+    </p:dataTable>
+</ui:composition>

@@ -1,0 +1,77 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <p:dataTable    value="#{appclientLazyService.lazyModel}"  var="obj"   id="id_table_appclient"  reflow="true"   widgetVar="dlgTableappclient"
+                    selection="#{appclientLazyService.selectedObject}" lazy="true" rowKey="#{obj.clientid}"  rows="20" paginator="true"
+                    emptyMessage="#{msg['obj.appclient.general.listempty']}" resizableColumns="true" 
+                    paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                    rowsPerPageTemplate="10,20,30,40,50,60,70,80,90,100">
+        <f:facet name="header">
+
+        </f:facet>
+        <p:column style="text-align: left;" filterBy="#{obj.clientid}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.appclient.detail.clientid']}
+            </f:facet>
+            <h:outputText style="white-space: pre-wrap" value="#{obj.clientid}"/>
+        </p:column>
+        <p:column style="text-align: left;" filterBy="#{obj.name}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.appclient.detail.name']}
+            </f:facet>
+            <h:outputText style="white-space: pre-wrap" value="#{obj.name}"/>
+        </p:column>
+        <p:column style="text-align: left;" filterBy="#{obj.ipaddress}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.appclient.detail.ipaddress']}
+            </f:facet>
+            <h:outputText style="white-space: pre-wrap" value="#{obj.ipaddress}"/>
+        </p:column>
+        <p:column style="text-align: left;" filterBy="#{obj.online_time}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.appclient.detail.online_time']}
+            </f:facet>
+            <h:outputText value="#{obj.online_time}">
+                <f:convertDateTime type="date" timeZone="GMT+7" pattern="dd/MM/yyyy HH:mm:ss"/>
+            </h:outputText>
+        </p:column>
+        <p:column style="text-align: left;" filterBy="#{obj.created_time}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.appclient.detail.created_time']}
+            </f:facet>
+            <h:outputText value="#{obj.created_time}">
+                <f:convertDateTime type="date" timeZone="GMT+7" pattern="dd/MM/yyyy HH:mm:ss"/>
+            </h:outputText>
+        </p:column>
+        <p:column style="text-align: left;" filterBy="#{obj.last_request_time}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.appclient.detail.last_request_time']}
+            </f:facet>
+            <h:outputText value="#{obj.last_request_time}">
+                <f:convertDateTime type="date" timeZone="GMT+7" pattern="dd/MM/yyyy HH:mm:ss"/>
+            </h:outputText>
+        </p:column>
+        <p:column style="text-align: left;" filterBy="#{obj.last_request_event}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.appclient.detail.last_request_event']}
+            </f:facet>
+            <h:outputText style="white-space: pre-wrap" value="#{obj.last_request_event}"/>
+        </p:column>
+
+        <p:column headerText="#{msg['general.control']}" style=" text-align: center">
+            <p:button icon="fa fa-search" outcome="view.html?id=#{obj.clientid}"/>  
+            <p:button icon="fa fa-pencil" outcome="edit.html?id=#{obj.clientid}"/>                          
+            <p:commandButton icon="fa fa-close"   action="#{appclientLazyService.deleteObject}" update="id_table_appclient" >
+                <f:setPropertyActionListener target="#{appclientLazyService.selectedObject}" value="#{obj}"/>
+                <p:confirm header="#{msg['general.confirm']}" message="#{msg['general.confirm.description']}" icon="ui-icon-alert" />
+            </p:commandButton>
+        </p:column>
+
+        <f:facet name="footer">
+
+        </f:facet>    
+    </p:dataTable>
+</ui:composition>

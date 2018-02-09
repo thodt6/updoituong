@@ -1,0 +1,119 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <f:metadata>       
+        <f:event type="preRenderView" listener="#{userSessionBean.verifyAccessPage}"/>
+        <f:event type="preRenderView" listener="#{ad_accountService.initCustomer}"/>
+    </f:metadata>
+
+    <ui:define name="title">Home</ui:define>
+    <ui:define name="head">      
+        <style type="text/css">
+            .main-content {
+                padding: 0;
+            }
+        </style>
+    </ui:define>
+
+    <ui:define name="content">
+        <div class="ui-g">
+            <div class="ui-g-12 ui-lg-12">
+                <h:form id="frmInfo">
+                    <p:panel>     
+                        <div style=" float:  left">                        
+                            <h3> #{msg['general.infor']}</h3>               
+                        </div>                        
+                        <div style=" float: right">
+                            <p:button icon="fa fa-dollar" id="id_balance" rendered="#{userSessionBean.user.oauth_provider eq 'facebook'}" onclick="return false;" value="#{ad_accountService.customer.balance} UID" styleClass="pink-btn"/>
+                            <p:button icon="fa fa-dollar" id="id_last_return_uid" rendered="#{userSessionBean.user.oauth_provider eq 'facebook'}" onclick="return false;" value="#{msg['obj.object.last.return_uid']} #{ad_accountService.customer.last_return_uid} UID" styleClass="orange-btn"/>
+                        </div>
+                        <br/><br/><br/>
+                        <p:separator/>
+                        <p>
+                            <h:outputText value="#{msg['obj.object.intro']}" escape="false"/>
+                        </p>
+                        <f:facet name="footer">
+                            #{msg['obj.object.register_code']} #{ad_accountService.customer.user_code}
+                        </f:facet>
+                    </p:panel>   
+                </h:form>
+            </div>
+            <div class="ui-g-12 ui-lg-12">
+                <h:form id="frmMessage">
+                    <p:messages id="id_msg" escape="false" closable="true" showIcon="true"/>
+                </h:form>
+            </div>
+            <div class="ui-g-12 ui-lg-4">
+                <h:form id="frmTaodoituong">
+                    <p:panel header="#{msg['obj.object.create_object']}">                        
+                        <h:outputText value="#{msg['obj.object.add_account']}" style=" font-weight: bolder"/>
+                        <br/>
+                        <p:selectOneMenu filter="true" filterMatchMode="contains" value="#{ad_accountService.selectedAd_id}">
+                            <f:selectItems value="#{ad_accountService.objects}" var="o" itemLabel="#{o.name}(#{o.account_id})" itemValue="#{o.account_id}"/>
+                        </p:selectOneMenu>
+                        <br/>
+                        <h:outputText value="#{msg['obj.object.name']}" style=" font-weight: bolder"/>
+                        <br/>
+                        <p:inputText style="width:90%" required="true" requiredMessage="#{msg['obj.object.name.requiredMsg']}" placeholder="#{msg['obj.object.name']}" value="#{ad_accountService.obj_name}"/>
+                        <br/>
+                        <h:outputText value="#{msg['obj.object.description']}" style=" font-weight: bolder"/>
+                        <br/>
+                        <p:inputTextarea style="width:90%"  placeholder="#{msg['obj.object.description']}" value="#{ad_accountService.obj_description}"/>
+                        <br/>
+                        <p:commandButton icon="fa fa-plus" value="#{msg['obj.object.create_object']}" action="#{ad_accountService.createObject}" update=":frmMessage:id_msg"/>
+                    </p:panel>   
+                </h:form>
+            </div>
+            <div class="ui-g-12 ui-lg-8">
+                <h:form id="frmThemNguoidung">
+                    <p:panel header="#{msg['obj.object.add_audiences']}">                        
+                        <h:outputText value="#{msg['obj.object.add_account']}" style=" font-weight: bolder"/>
+                        <br/>
+                        <p:selectOneMenu filter="true" filterMatchMode="contains" value="#{ad_accountService.selectedAd_id}">
+                            <f:selectItem itemLabel="#{msg['general.select']}" noSelectionOption="true"/>
+                            <f:selectItems value="#{ad_accountService.objects}" var="o" itemLabel="#{o.name}(#{o.account_id})" itemValue="#{o.account_id}"/>
+                            <p:ajax event="change" listener="#{ad_accountService.loadAudiences}" update="id_audiences,:frmMessage:id_msg"/>
+                        </p:selectOneMenu>
+                        <br/>
+                        <h:outputText value="#{msg['obj.object.select_object']}" style=" font-weight: bolder"/>
+                        <br/>
+                        <p:selectOneMenu id="id_audiences" value="#{ad_accountService.selectedObj_id}" filter="true" filterMatchMode="contains">
+                            <f:selectItem itemLabel="#{msg['general.select']}" noSelectionOption="true"/>
+                            <f:selectItems value="#{ad_accountService.audiences}" var="o" itemLabel="#{o.fieldId}- #{o.fieldName} - #{o.fieldDescription} - #{o.fieldApproximateCount}" itemValue="#{o.fieldId}"/>
+                            <p:ajax event="change" listener="#{ad_accountService.loadUploads}" update=":frmThemNguoidung,:frmUploads"/>
+                        </p:selectOneMenu>
+                        <br/><br/>
+                        <p:messages id="id_msg" closable="true"/>
+                        <br/>
+                        <p:fileUpload rendered="#{ad_accountService.uploadStatus}" fileUploadListener="#{ad_accountService.handleFileUpload}" mode="advanced" dragDropSupport="true" multiple="false"
+                                      update="id_msg,:frmInfo,:frmUploads" sizeLimit="1000000000" allowTypes="/(\.|\/)(txt|text)$/" /> 
+                        <br/>
+                        <p:button icon="fa fa-list-alt" value="#{msg['obj.object.management']}" onclick="window.open('https://www.facebook.com/ads/manage/audiences.php', '_blank');" />
+                    </p:panel> 
+                </h:form>
+            </div>
+            <div class="ui-g-12 ui-lg-12">
+                <h:form id="frmUploads">                   
+                    <p:panel>   
+                        <div style=" float:  right">                        
+                            <p:commandButton icon="fa fa-refresh" update="id_table_obj_upload" action="#{ad_accountService.loadUploads}"/>                      
+                        </div>                        
+                        <div style=" float: left">                        
+                            <h4>#{msg['obj.object.upload_history']}</h4>
+                        </div>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <ui:include src="upload_history.xhtml"/>
+                    </p:panel> 
+                </h:form>
+            </div>
+        </div> 
+    </ui:define>
+
+</ui:composition>

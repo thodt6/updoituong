@@ -1,0 +1,27 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank lesspad">
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.scanning_task.detail.taskid']} (*)"/>
+        <h:outputText style="white-space: pre-wrap" value="#{scanning_taskLazyService.selectedObject.taskid}"/>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.scanning_task.detail.client_id']} (*)"/>
+        <h:outputText style="white-space: pre-wrap" value="#{scanning_taskLazyService.selectedObject.client_id}"/>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.scanning_task.detail.start_time']}"/>
+        <h:outputText value="#{scanning_taskLazyService.selectedObject.start_time}">
+            <f:convertDateTime type="date" timeZone="GMT+7" pattern="dd/MM/yyyy HH:mm:ss"/>
+        </h:outputText>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.scanning_task.detail.state']}"/>
+        <h:outputText style="white-space: pre-wrap" value="#{scanning_taskLazyService.selectedObject.state}"/>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.scanning_task.detail.range_id']}"/>
+        <h:outputText style="white-space: pre-wrap" value="#{scanning_taskLazyService.selectedObject.range_id}"/>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.scanning_task.detail.start_position']}"/>
+        <h:outputText style="white-space: pre-wrap" value="#{scanning_taskLazyService.selectedObject.start_position}"/>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.scanning_task.detail.stop_position']}"/>
+        <h:outputText style="white-space: pre-wrap" value="#{scanning_taskLazyService.selectedObject.stop_position}"/>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.scanning_task.detail.total_result']}"/>
+        <h:outputText style="white-space: pre-wrap" value="#{scanning_taskLazyService.selectedObject.total_result}"/>
+    </p:panelGrid>
+</ui:composition>

@@ -1,0 +1,76 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <p:dataTable    value="#{clientLazyService.lazyModel}"  var="obj"   id="id_table_client" selectionMode="single"  reflow="true"   widgetVar="dlgTableclient"
+                    selection="#{clientLazyService.selectedObject}" lazy="true" rowKey="#{obj.uid}"  rows="20" paginator="true"
+                    emptyMessage="#{msg['obj.client.general.listempty']}" resizableColumns="true" paginatorPosition="bottom" sortField="update_time" sortMode="decending" 
+                    paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                    rowsPerPageTemplate="10,20,30,40,50,60,70,80,90,100">
+        <p:column style="width:16px">
+            <p:rowToggler />
+        </p:column>
+        <p:ajax event="rowSelect" listener="#{clientLazyService.loadRate}" update=":frmTopup" />
+        <p:rowExpansion>
+            <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank lesspad">
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.client.detail.uid']} (*)"/>
+                <h:outputText style="white-space: pre-wrap" value="#{obj.uid}"/>
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.client.detail.user_code']}"/>
+                <h:outputText style="white-space: pre-wrap" value="#{obj.user_code}"/>
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.client.detail.balance']}"/>
+                <h:outputText style="white-space: pre-wrap" value="#{obj.balance}"/>
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.client.detail.update_time']}"/>
+                <h:outputText value="#{obj.update_time}">
+                    <f:convertDateTime type="date" timeZone="GMT+7" pattern="dd/MM/yyyy HH:mm:ss"/>
+                </h:outputText>
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.client.detail.full_name']}"/>
+                <h:outputText style="white-space: pre-wrap" value="#{obj.full_name}"/>
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.client.detail.status']}"/>
+                <h:outputText style="white-space: pre-wrap" value="#{obj.status}"/>
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.client.detail.last_return_uid']} (*)"/>
+                <h:outputText style="white-space: pre-wrap" value="#{obj.last_return_uid}"/>
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.client.detail.last_return_time']}"/>
+                <h:outputText value="#{obj.last_return_time}">
+                    <f:convertDateTime type="date" timeZone="GMT+7" pattern="dd/MM/yyyy HH:mm:ss"/>
+                </h:outputText>
+
+            </p:panelGrid>
+
+        </p:rowExpansion>
+        <p:column style="text-align: left;" filterBy="#{obj.uid}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.client.detail.uid']}
+            </f:facet>
+            <h:outputText style="white-space: pre-wrap" value="#{obj.uid}"/>
+        </p:column>
+        <p:column style="text-align: left;" filterBy="#{obj.user_code}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.client.detail.user_code']}
+            </f:facet>
+            <h:outputText style="white-space: pre-wrap" value="#{obj.user_code}"/>
+        </p:column>        
+        <p:column style="text-align: left;" filterBy="#{obj.full_name}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.client.detail.full_name']}
+            </f:facet>
+            <h:outputText style="white-space: pre-wrap" value="#{obj.full_name}"/>
+        </p:column> 
+        <p:column style="text-align: left;" filterBy="#{obj.balance}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.client.detail.balance']}
+            </f:facet>
+            <h:outputText style="white-space: pre-wrap" value="#{obj.balance}"/>
+        </p:column>
+        <p:column headerText="#{msg['general.control']}" style=" text-align: center">
+            <p:commandButton icon="fa fa-money" value="Top Up" action="#{clientLazyService.loadRate}" update=":frmTopup">
+                <f:setPropertyActionListener value="#{obj}" target="#{clientLazyService.selectedObject}"/>
+            </p:commandButton>
+        </p:column>
+
+        <f:facet name="footer">
+
+        </f:facet>    
+    </p:dataTable>
+</ui:composition>

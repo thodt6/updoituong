@@ -1,0 +1,61 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    
+    <p:dataTable    value="#{ad_accountService.list_uploads}"  var="obj"   id="id_table_obj_upload"  reflow="true"   widgetVar="dlgTableobj_upload"
+                    rowKey="#{obj.obj_id}"  rows="20" paginator="true" paginatorPosition="bottom"
+                    emptyMessage="#{msg['obj.obj_upload.general.listempty']}" resizableColumns="true" 
+                    paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                    rowsPerPageTemplate="10,20,30,40,50,60,70,80,90,100">
+        <p:column style="text-align: left;" filterBy="#{obj.obj_id}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.obj_upload.detail.obj_id']}
+            </f:facet>
+            <p:commandButton id="id_obj_id" type="button" value="#{obj.obj_id}"/>
+            <p:overlayPanel for="id_obj_id" showCloseIcon="true" dynamic="true">
+                <p:inputTextarea cols="50" readonly="true" value="#{obj.audienceResult}"/>
+            </p:overlayPanel>
+            
+        </p:column>
+        <p:column style="text-align: left;">
+            <f:facet name="header">
+                #{msg['obj.obj_upload.detail.num_uid']}/#{msg['obj.obj_upload.detail.real_uid']}
+            </f:facet>
+            <h:outputText style="white-space: pre-wrap" value="#{obj.num_uid}/#{obj.real_uid}"/>
+        </p:column>
+        <p:column style="text-align: left;" filterBy="#{obj.last_uid}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.obj_upload.detail.last_uid']}
+            </f:facet>
+            <h:outputText style="white-space: pre-wrap" value="#{obj.last_uid}"/>
+        </p:column>
+        <p:column style="text-align: left;" filterBy="#{obj.file_name}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.obj_upload.detail.file_name']}
+            </f:facet>
+            <h:outputText style="white-space: pre-wrap" value="#{obj.file_name}"/>
+        </p:column>
+        <p:column style="text-align: left;">
+            <f:facet name="header">
+                #{msg['obj.obj_upload.detail.created_time']}
+            </f:facet>
+            <h:outputText value="#{obj.created_time}">
+                <f:convertDateTime type="date" timeZone="GMT+7" pattern="dd/MM/yyyy HH:mm:ss"/>
+            </h:outputText>
+        </p:column>
+        <p:column style="text-align: left;"  filterBy="#{obj.status}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.obj_upload.detail.status']}
+            </f:facet>
+            <h:outputText style="white-space: pre-wrap" value="#{msg['obj.obj_upload.status.0']}" rendered="#{obj.status==0}"/>
+            <h:outputText style="white-space: pre-wrap" value="#{msg['obj.obj_upload.status.1']} #{msg['obj.obj_upload.status.3']} #{obj.return_uid} UID" rendered="#{obj.status==1 and !obj.enableReturnUid}"/>
+            <h:outputText style="white-space: pre-wrap" value="#{msg['obj.obj_upload.status.3']} #{obj.return_uid} UID" rendered="#{obj.status==3}"/>
+            <p:commandButton icon="fa fa-recycle" value="#{msg['obj.obj_upload.status.2']}" rendered="#{obj.enableReturnUid and obj.status==1 }" update="id_table_obj_upload,:frmMessage:id_msg"  action="#{ad_accountService.returnUID}">
+                <f:setPropertyActionListener value="#{obj}" target="#{ad_accountService.upload}"/>
+            </p:commandButton>
+        </p:column>   
+    </p:dataTable>
+</ui:composition>

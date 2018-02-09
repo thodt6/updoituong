@@ -1,0 +1,59 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank lesspad">
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.appclient.detail.clientid']} (*)"/>
+        <p:outputPanel>
+            <p:inputText readonly="true" id="id_clientid" style="width:90%"  value="#{appclientLazyService.selectedObject.clientid}" required="true" requiredMessage="#{msg['obj.appclient.detail.clientid.validateMsg']}">
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.appclient.detail.clientid.helpMsg']}"/>
+                <p:message id="msg_id_clientid" for="id_clientid"/>
+            </p:inputText>
+        </p:outputPanel>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.appclient.detail.name']}"/>
+        <p:outputPanel>
+            <p:inputText  id="id_name" style="width:90%"  value="#{appclientLazyService.selectedObject.name}">
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.appclient.detail.name.helpMsg']}"/>
+                <p:message id="msg_id_name" for="id_name"/>
+            </p:inputText>
+        </p:outputPanel>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.appclient.detail.ipaddress']}"/>
+        <p:outputPanel>
+            <p:inputText  id="id_ipaddress" style="width:90%"  value="#{appclientLazyService.selectedObject.ipaddress}">
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.appclient.detail.ipaddress.helpMsg']}"/>
+                <p:message id="msg_id_ipaddress" for="id_ipaddress"/>
+            </p:inputText>
+        </p:outputPanel>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.appclient.detail.online_time']}"/>
+        <p:outputPanel>
+            <p:calendar  id="id_online_time" value="#{appclientLazyService.selectedObject.online_time}" pattern="dd/MM/yyyy HH:mm:ss">
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.appclient.detail.online_time.helpMsg']}"/>
+                <p:message id="msg_id_online_time" for="id_online_time"/>
+            </p:calendar>
+        </p:outputPanel>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.appclient.detail.created_time']}"/>
+        <p:outputPanel>
+            <p:calendar  id="id_created_time" value="#{appclientLazyService.selectedObject.created_time}" pattern="dd/MM/yyyy HH:mm:ss">
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.appclient.detail.created_time.helpMsg']}"/>
+                <p:message id="msg_id_created_time" for="id_created_time"/>
+            </p:calendar>
+        </p:outputPanel>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.appclient.detail.last_request_time']}"/>
+        <p:outputPanel>
+            <p:calendar  id="id_last_request_time" value="#{appclientLazyService.selectedObject.last_request_time}" pattern="dd/MM/yyyy HH:mm:ss">
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.appclient.detail.last_request_time.helpMsg']}"/>
+                <p:message id="msg_id_last_request_time" for="id_last_request_time"/>
+            </p:calendar>
+        </p:outputPanel>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.appclient.detail.last_request_event']}"/>
+        <p:outputPanel>
+            <p:inputText  id="id_last_request_event" style="width:90%"  value="#{appclientLazyService.selectedObject.last_request_event}">
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.appclient.detail.last_request_event.helpMsg']}"/>
+                <p:message id="msg_id_last_request_event" for="id_last_request_event"/>
+            </p:inputText>
+        </p:outputPanel>
+
+    </p:panelGrid>
+</ui:composition>

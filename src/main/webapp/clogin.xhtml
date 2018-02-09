@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <f:facet name="first">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+            <meta name="apple-mobile-web-app-capable" content="yes" />
+        </f:facet>
+        <title>Login</title>
+    </h:head>
+    <h:body styleClass="login-body">
+        <h:form>
+            <div class="login-panel ui-fluid">
+                <p:messages id="id_growl" globalOnly="true"/>
+                <div class="ui-g">
+                    <div class="ui-g-12 logo-container">
+                        <p:graphicImage value="uploads/defaults/logo.png" library="verona-layout" />
+                        <h1>#{msg['login.intro']}</h1>
+                        <h2>#{msg['login.welcome']}</h2>
+                    </div>
+                    <div class="ui-g-12">
+                        <p:inputText value="#{userSessionBean.userid}" placeholder="#{msg['login.username']}(*)" />
+                    </div>
+                    <div class="ui-g-12">
+                        <p:password value="#{userSessionBean.password}" placeholder="#{msg['login.password']}(*)" feedback="false"/>
+                    </div>
+                    <div class="ui-g-12 button-container">
+                        <p:commandButton  value="#{msg['login.login']}" icon="fa fa-user" styleClass="green-btn raised-btn rounded-btn" update="id_growl"  action="#{userSessionBean.doLogin}" />                       
+                    </div>
+                </div>
+            </div>       
+        </h:form>
+        <h:outputStylesheet name="css/layout-#{guestPreferences.layout}.css" library="verona-layout" />
+    </h:body>
+
+</html>

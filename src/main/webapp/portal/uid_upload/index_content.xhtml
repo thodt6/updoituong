@@ -1,0 +1,71 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <p:fileUpload   fileUploadListener="#{uid_uploadLazyService.handleFileUpload}" mode="advanced" dragDropSupport="true" multiple="false"
+                    update="id_table_uid_upload" sizeLimit="1000000000" allowTypes="/(\.|\/)(txt|text)$/" /> 
+
+    <br/><br/>
+
+    <p:dataTable    value="#{uid_uploadLazyService.lazyModel}"  var="obj"   id="id_table_uid_upload"  reflow="true"   widgetVar="dlgTableuid_upload"
+                    selection="#{uid_uploadLazyService.selectedObject}" rowKey="#{obj.upload_id}"  rows="20" paginator="true" lazy="true"
+                    emptyMessage="#{msg['obj.uid_upload.general.listempty']}" resizableColumns="true" paginatorPosition="bottom" sortBy="upload_id" sortOrder="descending" 
+                    paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                    rowsPerPageTemplate="10,20,30,40,50,60,70,80,90,100">
+        <f:facet name="header" >
+            <p:commandButton icon="fa fa-refresh" value="#{msg['general.refresh']}" action="#{uid_uploadLazyService.loadObjects}" update="id_table_uid_upload"/>
+        </f:facet>
+        <p:column style="text-align: left;" filterBy="#{obj.upload_id}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.uid_upload.detail.upload_id']}
+            </f:facet>
+            <h:outputText style="white-space: pre-wrap" value="#{obj.upload_id}"/>
+        </p:column>
+        <p:column style="text-align: left;" filterBy="#{obj.filename}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.uid_upload.detail.filename']}
+            </f:facet>
+            <h:outputText style="white-space: pre-wrap" value="#{obj.filename}"/>
+        </p:column>
+        <p:column style="text-align: left;" filterBy="#{obj.update_time}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.uid_upload.detail.update_time']}
+            </f:facet>
+            <h:outputText value="#{obj.update_time}">
+                <f:convertDateTime type="date" timeZone="GMT+7" pattern="dd/MM/yyyy HH:mm:ss"/>
+            </h:outputText>
+        </p:column>
+        <p:column style="text-align: left;" filterBy="#{obj.has_converted}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.uid_upload.detail.has_converted']}
+            </f:facet>
+            <h:outputText style="white-space: pre-wrap" value="#{obj.has_converted}"/>
+        </p:column>
+        <p:column style="text-align: left;" filterBy="#{obj.total_uid}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.uid_upload.detail.total_uid']}
+            </f:facet>
+            <h:outputText style="white-space: pre-wrap" value="#{obj.total_uid}"/>
+        </p:column>
+        <p:column style="text-align: left;" filterBy="#{obj.useable_uid}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.uid_upload.detail.useable_uid']}
+            </f:facet>
+            <h:outputText style="white-space: pre-wrap" value="#{obj.useable_uid}"/>
+        </p:column>
+        <p:column style="text-align: left;" filterBy="#{obj.download_count}" filterMatchMode="contains" filterStyle="width:95%">
+            <f:facet name="header">
+                #{msg['obj.uid_upload.detail.download_count']}
+            </f:facet>
+            <h:outputText style="white-space: pre-wrap" value="#{obj.download_count}"/>
+        </p:column>
+        <p:column headerText="#{msg['general.control']}" style=" text-align: center">
+            <p:button icon="fa fa-ban" disabled="true" rendered="#{obj.has_converted==0 or obj.useable_uid ==0}"/> 
+            <p:commandButton icon="fa fa-download" ajax="false" rendered="#{obj.has_converted==1 and obj.useable_uid > 0}">
+                <p:fileDownload value="#{obj.downloadFile}"/>
+            </p:commandButton>
+        </p:column>  
+    </p:dataTable>
+</ui:composition>
