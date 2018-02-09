@@ -1,0 +1,62 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank lesspad">
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.scanning_task.detail.taskid']} (*)"/>
+        <p:outputPanel>
+            <p:inputNumber readonly="true" id="id_taskid" value="#{scanning_taskLazyService.selectedObject.taskid}" required="true" requiredMessage="#{msg['obj.scanning_task.detail.taskid.validateMsg']}" decimalPlaces="0">
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.scanning_task.detail.taskid.helpMsg']}"/>
+                <p:message id="msg_id_taskid" for="id_taskid"/>
+            </p:inputNumber>
+        </p:outputPanel>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.scanning_task.detail.client_id']} (*)"/>
+        <p:outputPanel>
+            <p:inputText  id="id_client_id" style="width:90%"  value="#{scanning_taskLazyService.selectedObject.client_id}" required="true" requiredMessage="#{msg['obj.scanning_task.detail.client_id.validateMsg']}">
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.scanning_task.detail.client_id.helpMsg']}"/>
+                <p:message id="msg_id_client_id" for="id_client_id"/>
+            </p:inputText>
+        </p:outputPanel>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.scanning_task.detail.start_time']}"/>
+        <p:outputPanel>
+            <p:calendar  id="id_start_time" value="#{scanning_taskLazyService.selectedObject.start_time}" pattern="dd/MM/yyyy HH:mm:ss">
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.scanning_task.detail.start_time.helpMsg']}"/>
+                <p:message id="msg_id_start_time" for="id_start_time"/>
+            </p:calendar>
+        </p:outputPanel>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.scanning_task.detail.state']}"/>
+        <p:outputPanel>
+            <p:selectOneMenu value="#{obj.state}" >
+                <f:selectItem itemLabel="Select One" itemValue="#{null}" noSelectionOption="true" />
+                <f:selectItem itemLabel="Not assigned" itemValue="U"/>
+                <f:selectItem itemLabel="Running" itemValue="A"/>
+                <f:selectItem itemLabel="Completed" itemValue="C"/>
+                <f:selectItem itemLabel="Re Assigned" itemValue="R"/>
+            </p:selectOneMenu>
+        </p:outputPanel>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.scanning_task.detail.range_id']}"/>
+        <p:outputPanel>
+            <p:inputNumber  id="id_range_id" value="#{scanning_taskLazyService.selectedObject.range_id}" decimalPlaces="0">
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.scanning_task.detail.range_id.helpMsg']}"/>
+                <p:message id="msg_id_range_id" for="id_range_id"/>
+            </p:inputNumber>
+        </p:outputPanel>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.scanning_task.detail.start_position']}"/>
+        <p:outputPanel>
+            <p:inputText  id="id_start_position" style="width:90%"  value="#{scanning_taskLazyService.selectedObject.start_position}">
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.scanning_task.detail.start_position.helpMsg']}"/>
+                <p:message id="msg_id_start_position" for="id_start_position"/>
+            </p:inputText>
+        </p:outputPanel>
+        <h:outputLabel style="font-weight:bolder" value="#{msg['obj.scanning_task.detail.stop_position']}"/>
+        <p:outputPanel>
+            <p:inputText  id="id_stop_position" style="width:90%"  value="#{scanning_taskLazyService.selectedObject.stop_position}">
+                <h:outputLabel style="font-weight:bolder" value="#{msg['obj.scanning_task.detail.stop_position.helpMsg']}"/>
+                <p:message id="msg_id_stop_position" for="id_stop_position"/>
+            </p:inputText>
+        </p:outputPanel>
+
+    </p:panelGrid>
+</ui:composition>

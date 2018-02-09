@@ -91,6 +91,7 @@
 
         <p:column headerText="#{msg['general.control']}" style=" text-align: center">
             <p:button icon="fa fa-search" outcome="view.html?id=#{obj.taskid}"/>  
+            <p:button icon="fa fa-pencil" outcome="edit.html?id=#{obj.taskid}"/>  
             <p:commandButton icon="fa fa-close"   action="#{scanning_taskLazyService.deleteObject}" update="id_table_scanning_task" >
                 <f:setPropertyActionListener target="#{scanning_taskLazyService.selectedObject}" value="#{obj}"/>
                 <p:confirm header="#{msg['general.confirm']}" message="#{msg['general.confirm.description']}" icon="ui-icon-alert" />
