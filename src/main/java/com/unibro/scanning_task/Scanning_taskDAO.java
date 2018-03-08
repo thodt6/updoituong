@@ -37,6 +37,22 @@ public class Scanning_taskDAO {
             }
         }
     }
+    
+    public int getTotalResult() {
+        //Write your code here   
+        ApiClient client = new ApiClient(Global.getConfigValue("APP.FB_PHONE.API_ADDRESS") + "/scanning_task/total_result");
+        JsonObject data = client.executeGetQuery(null);
+        if (data == null) {
+            return 0;
+        } else {
+            if (data.get("code").getAsInt() == 200) {
+                Gson gson = Global.getGsonObject("yyyy-MM-dd'T'HH:mm:ss.Z");
+                return data.get("result").getAsInt();
+            } else {
+                return 0;
+            }
+        }
+    }
 
     public Scanning_task getObjectByKey(String id) {
         //Write your code here   

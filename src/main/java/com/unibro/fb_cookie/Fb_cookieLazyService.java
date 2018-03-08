@@ -4,6 +4,7 @@ import com.unibro.scanning.Scanning;
 import com.unibro.utils.Global;
 import com.unibro.utils.RequestFilter;
 import java.io.Serializable;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.application.FacesMessage;
@@ -23,6 +24,7 @@ import org.primefaces.model.LazyDataModel;
 public class Fb_cookieLazyService implements Serializable {
 
     private LazyDataModel<Fb_cookie> lazyModel;
+    private String import_data="";
     private Fb_cookie selectedObject = new Fb_cookie();
     private Fb_cookie[] selectedObjects;
     private Fb_cookie newObject = new Fb_cookie();
@@ -196,6 +198,44 @@ public class Fb_cookieLazyService implements Serializable {
                     dao.edit(this.selectedObject);
                     FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Not found, not valid account", "");
                     FacesContext.getCurrentInstance().addMessage(null, msg);
+                }
+            }
+        }
+    }
+
+    /**
+     * @return the import_data
+     */
+    public String getImport_data() {
+        return import_data;
+    }
+
+    /**
+     * @param import_data the import_data to set
+     */
+    public void setImport_data(String import_data) {
+        this.import_data = import_data;
+    }
+    
+    public void doImportData(){
+        String[] cookies_list=this.import_data.split("\n");
+        for(String cookie:cookies_list){
+            String[] cookie_path=cookie.split(",");
+            Fb_cookieDAO dao=new Fb_cookieDAO();
+            if(cookie_path.length>=2){
+                String real_cookie=cookie_path[0];
+                String next_cookie=cookie_path[1];
+                int index=next_cookie.indexOf("=");
+                String data1=next_cookie.substring(0,index);
+                String data2=next_cookie.substring(index+1);
+                real_cookie+=";" + data1 + "=" + URLEncoder.encode(data2);
+                logger.info("Real cookie");
+                Fb_cookie ck=new Fb_cookie();
+                ck.setCookie(real_cookie);
+                ck.setName(cookie_path[0]);
+                ck.setState("A");
+                if(dao.create(ck)!=null){
+                    logger.info("Updated cookied:" + ck.getCookie());
                 }
             }
         }

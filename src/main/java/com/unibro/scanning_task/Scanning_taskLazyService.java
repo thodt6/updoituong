@@ -154,4 +154,9 @@ public class Scanning_taskLazyService implements Serializable {
         }
     }
 
+    public int getTotalResult() {
+        Scanning_taskDAO dao = new Scanning_taskDAO();
+        return dao.getTotalResult();
+    }
+
 }
