@@ -24,12 +24,16 @@ import org.primefaces.model.LazyDataModel;
 public class Fb_cookieLazyService implements Serializable {
 
     private LazyDataModel<Fb_cookie> lazyModel;
-    private String import_data="";
+    private String import_data = "";
     private Fb_cookie selectedObject = new Fb_cookie();
     private Fb_cookie[] selectedObjects;
     private Fb_cookie newObject = new Fb_cookie();
     private String selectedId;
     private final Logger logger = Logger.getLogger(this.getClass().getName());
+
+    private String state;
+    private Integer start = -1;
+    private Integer stop = -1;
 
     private String test_number;
 
@@ -216,29 +220,80 @@ public class Fb_cookieLazyService implements Serializable {
     public void setImport_data(String import_data) {
         this.import_data = import_data;
     }
-    
-    public void doImportData(){
-        String[] cookies_list=this.import_data.split("\n");
-        for(String cookie:cookies_list){
-            String[] cookie_path=cookie.split(",");
-            Fb_cookieDAO dao=new Fb_cookieDAO();
-            if(cookie_path.length>=2){
-                String real_cookie=cookie_path[0];
-                String next_cookie=cookie_path[1];
-                int index=next_cookie.indexOf("=");
-                String data1=next_cookie.substring(0,index);
-                String data2=next_cookie.substring(index+1);
-                real_cookie+=";" + data1 + "=" + URLEncoder.encode(data2);
+
+    public void doImportData() {
+        String[] cookies_list = this.import_data.split("\n");
+        for (String cookie : cookies_list) {
+            String[] cookie_path = cookie.split(",");
+            Fb_cookieDAO dao = new Fb_cookieDAO();
+            if (cookie_path.length >= 2) {
+                String real_cookie = cookie_path[0];
+                String next_cookie = cookie_path[1];
+                int index = next_cookie.indexOf("=");
+                String data1 = next_cookie.substring(0, index);
+                String data2 = next_cookie.substring(index + 1);
+                real_cookie += ";" + data1 + "=" + URLEncoder.encode(data2);
                 logger.info("Real cookie");
-                Fb_cookie ck=new Fb_cookie();
+                Fb_cookie ck = new Fb_cookie();
                 ck.setCookie(real_cookie);
                 ck.setName(cookie_path[0]);
                 ck.setState("A");
-                if(dao.create(ck)!=null){
+                if (dao.create(ck) != null) {
                     logger.info("Updated cookied:" + ck.getCookie());
                 }
             }
         }
+    }
+
+    public void doUpdateState() {
+        Fb_cookieDAO dao = new Fb_cookieDAO();
+        int ret = dao.update_state(this.start, this.stop, state);
+        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Update success with result effected " + ret, "");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+
+    }
+
+
+    /**
+     * @return the state
+     */
+    public String getState() {
+        return state;
+    }
+
+    /**
+     * @param state the state to set
+     */
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    /**
+     * @return the start
+     */
+    public Integer getStart() {
+        return start;
+    }
+
+    /**
+     * @param start the start to set
+     */
+    public void setStart(Integer start) {
+        this.start = start;
+    }
+
+    /**
+     * @return the stop
+     */
+    public Integer getStop() {
+        return stop;
+    }
+
+    /**
+     * @param stop the stop to set
+     */
+    public void setStop(Integer stop) {
+        this.stop = stop;
     }
 
 }

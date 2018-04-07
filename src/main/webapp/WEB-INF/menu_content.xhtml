@@ -33,6 +33,10 @@
                 <p:menuitem id="menu_id_app_fbphonecms_mobile_range_create" value="#{msg['menu.id_app_fbphonecms_mobile_range_create']}" icon="fa fa-fw fa-angle-right" outcome="/portal/fbscanning/mobile_range/create.html"/>
             </p:submenu>
             <p:menuitem id="menu_id_fbscanning_task" value="Scanning Task" icon="fa fa-fw fa-tasks" outcome="/portal/fbscanning/scanning_task/index.html"/>
+            <p:submenu id="menu_id_atpcms_facebook_group" label="#{msg['menu.id_atpcms_facebook_group']}" icon="fa fa-fw fa-angle-right">
+                <p:menuitem id="menu_id_atpcms_facebook_group_index" value="#{msg['menu.id_atpcms_facebook_group_index']}" icon="fa fa-fw fa-angle-right" outcome="/portal/facebook_group/index.html"/>
+                <p:menuitem id="menu_id_atpcms_facebook_group_create" value="#{msg['menu.id_atpcms_facebook_group_create']}" icon="fa fa-fw fa-angle-right" outcome="/portal/facebook_group/create.html"/>
+            </p:submenu>
         </p:submenu>
         <p:menuitem id="menu_id_app_taodoituong_index" rendered="#{userSessionBean.user.groupListStr eq '3'}" value="#{msg['menu.home']}" icon="fa fa-fw fa-home" outcome="/portal/upobject/index.html"/>
         <p:menuitem id="menu_id_sign-out" value="#{msg['general.logout']}" icon="fa fa-fw fa-sign-out" action="#{userSessionBean.doLogout}" />

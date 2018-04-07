@@ -87,6 +87,21 @@ public class Fb_cookieDAO {
         }
     }
 
+    public int update_state(int start, int stop, String state) {
+        //Write your code here   
+        ApiClient client = new ApiClient(Global.getConfigValue("APP.FB_PHONE.API_ADDRESS") + "/update_state/" + start + "/" + stop + "/" + state);
+        JsonObject data = client.executePostQuery(null);
+        if (data == null) {
+            return 0;
+        } else {
+            if (data.get("code").getAsInt() == 200) {
+                return data.get("result").getAsInt();
+            } else {
+                return 0;
+            }
+        }
+    }
+
     public int create(List<Fb_cookie> list) {
         if (list == null || list.isEmpty()) {
             return 0;

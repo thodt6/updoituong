@@ -1,0 +1,59 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank lesspad">
+        <h:outputLabel style="font-weight:bolder" value="#{facebook_group['obj.facebook_group.detail.groupid']} (*)"/>
+        <p:outputPanel>
+            <p:inputText readonly="true" id="id_groupid" style="width:90%"  value="#{facebook_groupLazyService.selectedObject.groupid}" required="true" requiredMessage="#{facebook_group['obj.facebook_group.detail.groupid.validateMsg']}">
+                <h:outputLabel style="font-weight:bolder" value="#{facebook_group['obj.facebook_group.detail.groupid.helpMsg']}"/>
+                <p:message id="msg_id_groupid" for="id_groupid"/>
+            </p:inputText>
+        </p:outputPanel>
+        <h:outputLabel style="font-weight:bolder" value="#{facebook_group['obj.facebook_group.detail.name']} (*)"/>
+        <p:outputPanel>
+            <p:inputText  id="id_name" style="width:90%"  value="#{facebook_groupLazyService.selectedObject.name}" required="true" requiredMessage="#{facebook_group['obj.facebook_group.detail.name.validateMsg']}">
+                <h:outputLabel style="font-weight:bolder" value="#{facebook_group['obj.facebook_group.detail.name.helpMsg']}"/>
+                <p:message id="msg_id_name" for="id_name"/>
+            </p:inputText>
+        </p:outputPanel>
+        <h:outputLabel style="font-weight:bolder" value="#{facebook_group['obj.facebook_group.detail.created_time']}"/>
+        <p:outputPanel>
+            <p:calendar  id="id_created_time" value="#{facebook_groupLazyService.selectedObject.created_time}" pattern="dd/MM/yyyy HH:mm:ss">
+                <h:outputLabel style="font-weight:bolder" value="#{facebook_group['obj.facebook_group.detail.created_time.helpMsg']}"/>
+                <p:message id="msg_id_created_time" for="id_created_time"/>
+            </p:calendar>
+        </p:outputPanel>
+        <h:outputLabel style="font-weight:bolder" value="#{facebook_group['obj.facebook_group.detail.uid_file']}"/>
+        <p:outputPanel>
+            <p:inputText  id="id_uid_file" style="width:90%"  value="#{facebook_groupLazyService.selectedObject.uid_file}">
+                <h:outputLabel style="font-weight:bolder" value="#{facebook_group['obj.facebook_group.detail.uid_file.helpMsg']}"/>
+                <p:message id="msg_id_uid_file" for="id_uid_file"/>
+            </p:inputText>
+        </p:outputPanel>
+        <h:outputLabel style="font-weight:bolder" value="#{facebook_group['obj.facebook_group.detail.state']}"/>
+        <p:outputPanel>
+            <p:inputText  id="id_state" style="width:90%"  value="#{facebook_groupLazyService.selectedObject.state}">
+                <h:outputLabel style="font-weight:bolder" value="#{facebook_group['obj.facebook_group.detail.state.helpMsg']}"/>
+                <p:message id="msg_id_state" for="id_state"/>
+            </p:inputText>
+        </p:outputPanel>
+        <h:outputLabel style="font-weight:bolder" value="#{facebook_group['obj.facebook_group.detail.created_id']}"/>
+        <p:outputPanel>
+            <p:inputText  id="id_created_id" style="width:90%"  value="#{facebook_groupLazyService.selectedObject.created_id}">
+                <h:outputLabel style="font-weight:bolder" value="#{facebook_group['obj.facebook_group.detail.created_id.helpMsg']}"/>
+                <p:message id="msg_id_created_id" for="id_created_id"/>
+            </p:inputText>
+        </p:outputPanel>
+        <h:outputLabel style="font-weight:bolder" value="#{facebook_group['obj.facebook_group.detail.total_member']}"/>
+        <p:outputPanel>
+            <p:inputNumber  id="id_total_member" value="#{facebook_groupLazyService.selectedObject.total_member}" decimalPlaces="0">
+                <h:outputLabel style="font-weight:bolder" value="#{facebook_group['obj.facebook_group.detail.total_member.helpMsg']}"/>
+                <p:message id="msg_id_total_member" for="id_total_member"/>
+            </p:inputNumber>
+        </p:outputPanel>
+
+    </p:panelGrid>
+</ui:composition>

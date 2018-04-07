@@ -1,0 +1,49 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+    <f:metadata>        
+        <f:event type="preRenderView" listener="#{userSessionBean.verifyAccessPage}"/>
+    </f:metadata>
+    <ui:define name="head">
+
+    </ui:define>
+    <ui:define name="title">#{facebook_group['obj.facebook_group.general.list']}</ui:define>
+    <ui:define name="viewname">#{facebook_group['obj.facebook_group.general.list']}</ui:define>
+    <ui:define name="content">
+        <div class="ui-g">
+            <div class="ui-g-12 ui-lg-12">
+                <p:panel>                        
+                    <div style=" float:  right">             
+                        <p:button icon="fa fa-import" value="Import Group" outcome="import.html"/>  
+                        <p:button icon="fa fa-plus" value="Add Facebook_group" outcome="create.html"/>  
+                        <p:button icon="fa fa-close"/>                          
+                    </div>                        
+                    <div style=" float: left">                        
+                        #{facebook_group['obj.facebook_group.general.list']}
+                    </div>
+                    <br/>
+                    <br/>
+                    <p:separator/>
+                    <h:form id="frmObject">
+                        <p:messages id="id_msg" closable="true"/>
+                        <div class="ui-g">
+                            <div class="ui-g-12 ui-lg-12">
+                                <ui:include src="index_content.xhtml"/>
+                            </div>
+                            <div class="ui-g-12 ui-lg-3">
+
+                            </div>
+                        </div>
+                    </h:form>
+                </p:panel>                    
+                <p:confirmDialog global="true"  id="id_dlgDelete" showEffect="fade" hideEffect="explode">
+                    <p:commandButton value="#{msg['general.yes']}" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                    <p:commandButton value="#{msg['general.no']}" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                </p:confirmDialog>   
+            </div>
+        </div> 
+    </ui:define>
+</ui:composition>

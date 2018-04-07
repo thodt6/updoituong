@@ -64,7 +64,7 @@ public class ApiClient {
             HttpEntity entity = response.getEntity();
             String respStr = EntityUtils.toString(entity, "UTF-8");
             logger.info("Get " + request.getURI().toURL().toString() + ":" + respStr);
-            Gson gson = Global.getGsonObject("yyyy-MM-dd'T'HH:mm:ss.Z");
+            Gson gson = Global.getGsonObject("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
             return gson.fromJson(respStr, JsonObject.class);
         } catch (IOException ex) {
             logger.error("Error:" + ex);
@@ -84,7 +84,7 @@ public class ApiClient {
             HttpPost post = new HttpPost(url);
             post.setHeader("Content-type", "application/json");
             post.setHeader("Authorization", this.secret);
-            Gson gson = Global.getGsonObject("yyyy-MM-dd'T'HH:mm:ss.Z");
+            Gson gson = Global.getGsonObject("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
             if (object != null) {
                 post.setEntity(new StringEntity(gson.toJson(object), "UTF-8"));
             }
@@ -108,7 +108,7 @@ public class ApiClient {
             org.apache.http.client.HttpClient httpClient = HttpClientBuilder.create().build();
             HttpPost post = new HttpPost(url);
             post.setHeader("Content-type", "application/json");
-            Gson gson = Global.getGsonObject("yyyy-MM-dd'T'HH:mm:ss.Z");
+            Gson gson = Global.getGsonObject("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
             if (object != null) {
                 post.setEntity(new StringEntity(gson.toJson(object), "UTF-8"));
             }
@@ -130,7 +130,7 @@ public class ApiClient {
             HttpPut request = new HttpPut(url);
             request.setHeader("Content-type", "application/json");
             request.setHeader("Authorization", this.secret);
-            Gson gson = Global.getGsonObject("yyyy-MM-dd'T'HH:mm:ss.Z");
+            Gson gson = Global.getGsonObject("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
             if (object != null) {
                 request.setEntity(new StringEntity(gson.toJson(object), "UTF-8"));
             }
@@ -155,7 +155,7 @@ public class ApiClient {
             HttpDelete request = new HttpDelete(url);
             request.setHeader("Content-type", "application/json");
             request.setHeader("Authorization", this.secret);
-            Gson gson = Global.getGsonObject("yyyy-MM-dd'T'HH:mm:ss.Z");
+            Gson gson = Global.getGsonObject("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
             BasicResponseHandler responseHandler = new BasicResponseHandler();
             String response = (String) httpClient.execute(request, responseHandler);
             logger.info("Http Response:" + response);

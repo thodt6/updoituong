@@ -56,7 +56,7 @@ public class UserDAO {
                 if (result == null || (result instanceof JsonNull)) {
                     return null;
                 }
-                Gson gson = Global.getGsonObject("yyyy-MM-dd'T'HH:mm:ss.Z");
+                Gson gson = Global.getGsonObject("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
                 return gson.fromJson(data.get("result").getAsJsonObject().toString(), User.class);
             } else {
                 return null;
@@ -87,7 +87,7 @@ public class UserDAO {
             return null;
         } else {
             if (data.get("status").getAsInt() == 200 && data.get("result")!=null && !data.get("result").toString().equals("null")) {
-                Gson gson = Global.getGsonObject("yyyy-MM-dd'T'HH:mm:ss.Z");
+                Gson gson = Global.getGsonObject("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
                 JsonElement result = data.get("result");
                 if (result != null && !(result instanceof JsonNull)) {
                     return gson.fromJson(data.get("result").getAsJsonArray().toString(), new TypeToken<ArrayList<User>>() {
@@ -109,7 +109,7 @@ public class UserDAO {
             return null;
         } else {
             if (data.get("status").getAsInt() == 200 && data.get("result")!=null && !data.get("result").toString().equals("null")) {
-                Gson gson = Global.getGsonObject("yyyy-MM-dd'T'HH:mm:ss.Z");
+                Gson gson = Global.getGsonObject("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
                 return gson.fromJson(data.get("result").getAsJsonObject().toString(), User.class);
             } else {
                 return null;
@@ -133,7 +133,7 @@ public class UserDAO {
             return null;
         } else {
             if (data.get("status").getAsInt() == 200 && data.get("result")!=null && !data.get("result").toString().equals("null")) {
-                Gson gson = Global.getGsonObject("yyyy-MM-dd'T'HH:mm:ss.Z");
+                Gson gson = Global.getGsonObject("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
                 return gson.fromJson(data.get("result").getAsJsonObject().toString(), User.class);
             } else {
                 return null;

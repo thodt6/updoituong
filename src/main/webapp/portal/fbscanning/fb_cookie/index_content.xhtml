@@ -4,9 +4,24 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui">
 
+
+    <p:panelGrid columns="4" style=" width: 50%" layout="grid" styleClass="ui-panelgrid-blank lesspad">
+        <p:inputNumber placeholder="Start ID" value="#{fb_cookieLazyService.start}" decimalPlaces="0"/>
+        <p:inputNumber placeholder="Stop ID" value="#{fb_cookieLazyService.stop}" decimalPlaces="0"/>
+        <p:selectOneMenu placeholder="State" value="#{fb_cookieLazyService.state}">
+            <f:selectItem itemLabel="Pending" itemValue="P"/>
+            <f:selectItem itemLabel="Active" itemValue="A"/>
+            <f:selectItem itemLabel="Mobile" itemValue="M"/>
+        </p:selectOneMenu>    
+        <p:commandButton value="Update State" action="#{fb_cookieLazyService.doUpdateState}" update="id_table_fb_cookie,id_msg"/>
+    </p:panelGrid>
+
+    <br/>
+
     <p:dataTable    value="#{fb_cookieLazyService.lazyModel}"  var="obj"   id="id_table_fb_cookie"  reflow="true"   widgetVar="dlgTablefb_cookie"
                     selection="#{fb_cookieLazyService.selectedObject}" lazy="true" rowKey="#{obj.fbid}"  rows="20" paginator="true"
                     emptyMessage="#{msg['obj.fb_cookie.general.listempty']}" resizableColumns="true"  paginatorPosition="bottom"
+                    sortBy="#{obj.fbid}" sortOrder="ascending"  
                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                     rowsPerPageTemplate="10,20,30,40,50,60,70,80,90,100">
         <f:facet name="header">
