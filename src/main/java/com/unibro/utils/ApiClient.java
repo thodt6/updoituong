@@ -90,9 +90,9 @@ public class ApiClient {
             }
             BasicResponseHandler responseHandler = new BasicResponseHandler();
             String response = (String) httpClient.execute(post, responseHandler);
-            logger.info("Http Response:" + response);
+//            logger.info("Http Response:" + response);
             response = response.trim();
-            logger.info("Get " + post.getURI().toURL().toString() + ":" + response);
+//            logger.info("Get " + post.getURI().toURL().toString() + ":" + response);
             return gson.fromJson(response, JsonObject.class);
         } catch (IOException ex) {
             logger.error("Error:" + ex);

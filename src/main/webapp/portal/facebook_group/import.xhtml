@@ -6,6 +6,7 @@
                 template="/WEB-INF/template.xhtml">
     <f:metadata>       
         <f:event type="preRenderView" listener="#{userSessionBean.verifyAccessPage}"/>
+        <f:event type="preRenderView" listener="#{customer_typeService.loadObjects}"/>
     </f:metadata>
     <ui:define name="title">#{facebook_group['obj.facebook_group.general.list']}</ui:define>
     <ui:define name="viewname">#{facebook_group['obj.facebook_group.general.list']} / Import Group</ui:define>
@@ -24,14 +25,14 @@
                     <br/>
                     <br/>
                     <p:separator/>
-                    <h:form id="frmObject">
-                        <p:messages id="id_facebook_group" closable="true"/>
+                    <h:form id="frmObject">                        
                         <div class="ui-g">
                             <div class="ui-g-12 ui-lg-8">
                                 <p:panel>
                                     <ui:include src="import_content.xhtml"/>
                                 </p:panel>
                                 <br/>
+                                <p:messages id="id_facebook_group" closable="true"/>
                                 <div style="float: left;">
                                     <p:button icon="fa fa-arrow-left"  value="#{msg['general.cancel']}" outcome="index.html"/>
                                 </div>

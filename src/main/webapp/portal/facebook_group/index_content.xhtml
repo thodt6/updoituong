@@ -6,23 +6,26 @@
 
     <p:dataTable    value="#{facebook_groupLazyService.lazyModel}"  var="obj"   id="id_table_facebook_group"  reflow="true"   widgetVar="dlgTablefacebook_group"
                     selection="#{facebook_groupLazyService.selectedObject}" lazy="true" rowKey="#{obj.uniqueKey}"  rows="20" paginator="true"
-                    emptyMessage="#{facebook_group['obj.facebook_group.general.listempty']}" resizableColumns="true" sortBy="#{obj.groupid}" sortOrder="ascending"  
+                    emptyMessage="#{facebook_group['obj.facebook_group.general.listempty']}" resizableColumns="true" sortBy="#{obj.created_time}" sortOrder="descending"  
                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                     rowsPerPageTemplate="10,20,30,40,50,60,70,80,90,100">
         <f:facet name="header">
-
+            <p:commandButton icon="fa fa-refresh" action="#{facebook_groupLazyService.loadObjects}" update=":frmObject:id_table_facebook_group"/>
+            <p:commandButton value="Update Group Info"  action="#{facebook_groupLazyService.updateAllGroupInfo}" update=":frmObject:id_table_facebook_group"/>
         </f:facet>
         <p:column style="text-align: left;" filterBy="#{obj.groupid}" filterMatchMode="contains" filterStyle="width:95%">
             <f:facet name="header">
                 #{facebook_group['obj.facebook_group.detail.groupid']}
             </f:facet>
-            <h:outputText style="white-space: pre-wrap" value="#{obj.groupid}"/>
+            <h:graphicImage value="#{obj.icon}"/>
+            <p:spacer width="10"/>
+            <p:link value="#{obj.groupid}" href="https://facebook.com/#{obj.groupid}" target="_blank"/>
         </p:column>
         <p:column style="text-align: left;" filterBy="#{obj.name}" filterMatchMode="contains" filterStyle="width:95%">
             <f:facet name="header">
                 #{facebook_group['obj.facebook_group.detail.name']}
             </f:facet>
-            <h:outputText style="white-space: pre-wrap" value="#{obj.name}"/>
+            <h:outputText style="white-space: pre-wrap" value="#{obj.name}"/>            
         </p:column>
         <p:column style="text-align: left;" filterBy="#{obj.created_time}" filterMatchMode="contains" filterStyle="width:95%">
             <f:facet name="header">
@@ -31,24 +34,35 @@
             <h:outputText value="#{obj.created_time}">
                 <f:convertDateTime type="date" timeZone="GMT+7" pattern="dd/MM/yyyy HH:mm:ss"/>
             </h:outputText>
-        </p:column>
-        <p:column style="text-align: left;" filterBy="#{obj.uid_file}" filterMatchMode="contains" filterStyle="width:95%">
-            <f:facet name="header">
-                #{facebook_group['obj.facebook_group.detail.uid_file']}
-            </f:facet>
-            <h:outputText style="white-space: pre-wrap" value="#{obj.uid_file}"/>
-        </p:column>
-        <p:column style="text-align: left;" filterBy="#{obj.state}" filterMatchMode="contains" filterStyle="width:95%">
+        </p:column>       
+        <p:column style="text-align: left;" filterBy="#{obj.state}" filterMatchMode="exact" filterStyle="width:95%">
             <f:facet name="header">
                 #{facebook_group['obj.facebook_group.detail.state']}
             </f:facet>
-            <h:outputText style="white-space: pre-wrap" value="#{obj.state}"/>
-        </p:column>
-        <p:column style="text-align: left;" filterBy="#{obj.created_id}" filterMatchMode="contains" filterStyle="width:95%">
-            <f:facet name="header">
-                #{facebook_group['obj.facebook_group.detail.created_id']}
+            <f:facet name="filter">
+                <p:selectOneMenu onchange="PF('dlgTablefacebook_group').filter()" >
+                    <f:selectItem itemLabel="Select One" itemValue="#{null}" noSelectionOption="true" />
+                    <f:selectItem itemLabel="Pending" itemValue="P"  />
+                    <f:selectItem itemLabel="Complete" itemValue="C"  />
+                </p:selectOneMenu>
             </f:facet>
-            <h:outputText style="white-space: pre-wrap" value="#{obj.created_id}"/>
+            <h:outputText style="white-space: pre-wrap" value="Pending" rendered="#{obj.state eq 'P'}"/>
+            <h:outputText style="white-space: pre-wrap" value="Completed" rendered="#{obj.state eq 'C'}"/>
+        </p:column>
+        <p:column style="text-align: left;" filterBy="#{obj.customer_type}" filterMatchMode="exact" filterStyle="width:95%">
+            <f:facet name="header">
+                #{facebook_group['obj.facebook_group.detail.customer_type']}
+            </f:facet>
+            <f:facet name="filter">
+                <p:selectOneMenu style="width:90%" onchange="PF('dlgTablefacebook_group').filter()" >
+                    <f:selectItem itemLabel="Select One" itemValue="#{null}" noSelectionOption="true" />
+                    <f:selectItems value="#{customer_typeService.objects}" var="c" itemLabel="#{c.name}" itemValue="#{c.type_id}"/>
+                </p:selectOneMenu>
+            </f:facet>
+            <p:selectOneMenu style="width:90%" value="#{obj.customer_type}">               
+                <f:selectItems value="#{customer_typeService.objects}" var="c" itemLabel="#{c.name}" itemValue="#{c.type_id}"/>
+                <p:ajax event="change" listener="#{obj.editMe}"/>
+            </p:selectOneMenu>
         </p:column>
         <p:column style="text-align: left;" filterBy="#{obj.total_member}" filterMatchMode="contains" filterStyle="width:95%">
             <f:facet name="header">
@@ -64,8 +78,18 @@
                 <f:setPropertyActionListener target="#{facebook_groupLazyService.selectedObject}" value="#{obj}"/>
                 <p:confirm header="#{msg['general.confirm']}" message="#{msg['general.confirm.description']}" icon="ui-icon-alert" />
             </p:commandButton>
+            <p:commandButton icon="fa fa-file-excel-o" ajax="false" rendered="#{obj.state eq 'C' and obj.total_member > 0}">
+                <p:fileDownload value="#{obj.downloadCsvFile}"/>
+            </p:commandButton>
+            <p:commandButton icon="fa fa-file-text-o" ajax="false" rendered="#{obj.state eq 'C' and obj.total_member > 0}">
+                <p:fileDownload value="#{obj.downloadTxtFile}"/>
+            </p:commandButton>
+            <p:commandButton icon="fa fa-refresh" action="#{facebook_groupLazyService.doRetryConvert}" update=":frmObject:id_msg">
+                <f:setPropertyActionListener target="#{facebook_groupLazyService.selectedObject}" value="#{obj}"/>
+            </p:commandButton>
+            <p:commandButton icon="fa fa-group" action="#{obj.updateFbInfo}" update="@this">                
+            </p:commandButton>
         </p:column>
-
         <f:facet name="footer">
 
         </f:facet>    

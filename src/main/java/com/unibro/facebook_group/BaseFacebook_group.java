@@ -28,6 +28,13 @@ public class BaseFacebook_group implements Serializable {
     private String state = "";
     private String created_id = "";
     private Integer total_member = 0;
+    private String description = "";
+    private String email = "";
+    private String icon = "";
+    private String owner_id = "";
+    private String privacy = "";
+    private String updated_time = "";
+    private Integer customer_type = 0;
 
     public void setGroupid(String groupid) {
         this.groupid = groupid;
@@ -83,6 +90,54 @@ public class BaseFacebook_group implements Serializable {
 
     public Integer getTotal_member() {
         return this.total_member;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getEmail() {
+        return this.email;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
+    public String getIcon() {
+        return this.icon;
+    }
+
+    public void setOwner_id(String owner_id) {
+        this.owner_id = owner_id;
+    }
+
+    public String getOwner_id() {
+        return this.owner_id;
+    }
+
+    public void setPrivacy(String privacy) {
+        this.privacy = privacy;
+    }
+
+    public String getPrivacy() {
+        return this.privacy;
+    }
+
+    public void setUpdated_time(String updated_time) {
+        this.updated_time = updated_time;
+    }
+
+    public String getUpdated_time() {
+        return this.updated_time;
     }
 
     public String toJsonStr() {
@@ -141,6 +196,20 @@ public class BaseFacebook_group implements Serializable {
 
     public String getUniqueKey() {
         return groupid;
+    }
+
+    /**
+     * @return the customer_type
+     */
+    public Integer getCustomer_type() {
+        return customer_type;
+    }
+
+    /**
+     * @param customer_type the customer_type to set
+     */
+    public void setCustomer_type(Integer customer_type) {
+        this.customer_type = customer_type;
     }
 
 }

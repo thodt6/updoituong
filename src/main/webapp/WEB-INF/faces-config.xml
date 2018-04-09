@@ -20,6 +20,10 @@
         <resource-bundle>
             <base-name>config.lang_facebook_group</base-name>
             <var>facebook_group</var>
+        </resource-bundle> 
+        <resource-bundle>
+            <base-name>config.lang_customer_type</base-name>
+            <var>customer_type</var>
         </resource-bundle>        
         <action-listener>org.primefaces.application.DialogActionListener</action-listener>
         <navigation-handler>org.primefaces.application.DialogNavigationHandler</navigation-handler>

@@ -8,6 +8,7 @@
         <f:event type="preRenderView" listener="#{userSessionBean.verifyAccessPage}"/>
         <f:viewParam id="id" name="id" value="#{facebook_groupLazyService.selectedId}"/>
         <f:event type="preRenderView" listener="#{facebook_groupLazyService.initSelectedObject}"/>
+        <f:event type="preRenderView" listener="#{customer_typeService.loadObjects}"/>
     </f:metadata>
     <ui:define name="title">#{facebook_group['obj.facebook_group.general']}</ui:define>
     <ui:define name="viewname">#{facebook_group['obj.facebook_group.general']} / #{msg['general.update']} #{facebook_groupLazyService.selectedObject.uniqueKey}</ui:define>

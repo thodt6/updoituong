@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.unibro.facebook_group;
+package com.unibro.customer_type;
 
 import com.unibro.utils.Global;
 import com.unibro.utils.RequestFilter;
@@ -22,11 +22,11 @@ import org.primefaces.event.RowEditEvent;
 @SuppressWarnings("serial")
 @ManagedBean
 @ViewScoped
-public class Facebook_groupService {
+public class Customer_typeService {
 
-    private List<Facebook_group> objects;
-    private Facebook_group selectedObject;
-    private Facebook_group newObject;
+    private List<Customer_type> objects;
+    private Customer_type selectedObject;
+    private Customer_type newObject;
 
     private String selectedId;
 
@@ -34,21 +34,21 @@ public class Facebook_groupService {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         if (!facesContext.isPostback() && !facesContext.isValidationFailed()) {
             //Add code for init object here
-            Facebook_groupDAO dao = new Facebook_groupDAO();
+            Customer_typeDAO dao = new Customer_typeDAO();
             this.selectedObject = dao.getObjectByKey(selectedId);
         }
     }
 
     public final void loadObjects() {
         //Add code to load object here
-        Facebook_groupDAO dao = new Facebook_groupDAO();
-        this.objects = dao.load(0, -1, "null", 0, new ArrayList());
+        Customer_typeDAO dao = new Customer_typeDAO();
+        this.objects = dao.load(0, -1, "type_id", -1, new ArrayList());
     }
 
     public void createObject() {
         if (this.getNewObject() != null) {
-            Facebook_groupDAO dao = new Facebook_groupDAO();
-            Facebook_group result = dao.create(getNewObject());
+            Customer_typeDAO dao = new Customer_typeDAO();
+            Customer_type result = dao.create(getNewObject());
             if (result != null) {
                 this.newObject = result;
                 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, Global.getResourceLanguage("general.operationSuccess"), "");
@@ -62,7 +62,7 @@ public class Facebook_groupService {
 
     public void editSelected() {
         if (this.selectedObject != null) {
-            Facebook_groupDAO dao = new Facebook_groupDAO();
+            Customer_typeDAO dao = new Customer_typeDAO();
             if (dao.edit(this.selectedObject) != null) {
                 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, Global.getResourceLanguage("general.operationSuccess"), "");
                 FacesContext.getCurrentInstance().addMessage(null, msg);
@@ -75,22 +75,22 @@ public class Facebook_groupService {
 
     public void deleteObject() {
         if (this.selectedObject != null) {
-            Facebook_groupDAO dao = new Facebook_groupDAO();
+            Customer_typeDAO dao = new Customer_typeDAO();
             dao.delete(selectedObject);
             this.loadObjects();
         }
     }
 
     public void rowEdit(RowEditEvent event) {
-        Facebook_group sf = (Facebook_group) event.getObject();
+        Customer_type sf = (Customer_type) event.getObject();
         if (sf != null) {
             this.setSelectedObject(sf);
             this.editSelected();
         }
     }
 
-    public List<Facebook_group> completeObject(String query) {
-        Facebook_groupDAO dao = new Facebook_groupDAO();
+    public List<Customer_type> completeObject(String query) {
+        Customer_typeDAO dao = new Customer_typeDAO();
         if (query == null || query.equals("")) {
             return dao.load(0, -1, "null", 0, new ArrayList());
         } else {
@@ -108,42 +108,42 @@ public class Facebook_groupService {
     /**
      * @return the objects
      */
-    public List<Facebook_group> getObjects() {
+    public List<Customer_type> getObjects() {
         return objects;
     }
 
     /**
      * @param objects the objects to set
      */
-    public void setObjects(List<Facebook_group> objects) {
+    public void setObjects(List<Customer_type> objects) {
         this.objects = objects;
     }
 
     /**
      * @return the selectedObject
      */
-    public Facebook_group getSelectedObject() {
+    public Customer_type getSelectedObject() {
         return selectedObject;
     }
 
     /**
      * @param selectedObject the selectedObject to set
      */
-    public void setSelectedObject(Facebook_group selectedObject) {
+    public void setSelectedObject(Customer_type selectedObject) {
         this.selectedObject = selectedObject;
     }
 
     /**
      * @return the newObject
      */
-    public Facebook_group getNewObject() {
+    public Customer_type getNewObject() {
         return newObject;
     }
 
     /**
      * @param newObject the newObject to set
      */
-    public void setNewObject(Facebook_group newObject) {
+    public void setNewObject(Customer_type newObject) {
         this.newObject = newObject;
     }
 
@@ -160,5 +160,4 @@ public class Facebook_groupService {
     public void setSelectedId(String selectedId) {
         this.selectedId = selectedId;
     }
-    
 }

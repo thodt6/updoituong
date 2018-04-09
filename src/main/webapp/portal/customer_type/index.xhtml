@@ -6,24 +6,22 @@
                 template="/WEB-INF/template.xhtml">
     <f:metadata>        
         <f:event type="preRenderView" listener="#{userSessionBean.verifyAccessPage}"/>
-        <f:event type="preRenderView" listener="#{customer_typeService.loadObjects}"/>
     </f:metadata>
     <ui:define name="head">
 
     </ui:define>
-    <ui:define name="title">#{facebook_group['obj.facebook_group.general.list']}</ui:define>
-    <ui:define name="viewname">#{facebook_group['obj.facebook_group.general.list']}</ui:define>
+    <ui:define name="title">#{customer_type['obj.customer_type.general.list']}</ui:define>
+    <ui:define name="viewname">#{customer_type['obj.customer_type.general.list']}</ui:define>
     <ui:define name="content">
         <div class="ui-g">
             <div class="ui-g-12 ui-lg-12">
                 <p:panel>                        
-                    <div style=" float:  right">             
-                        <p:button icon="fa fa-import" value="Import Group" outcome="import.html"/>  
-                        <p:button icon="fa fa-plus" value="Add Facebook_group" outcome="create.html"/>  
+                    <div style=" float:  right">                        
+                        <p:button icon="fa fa-plus" value="Add Customer_type" outcome="create.html"/>  
                         <p:button icon="fa fa-close"/>                          
                     </div>                        
                     <div style=" float: left">                        
-                        #{facebook_group['obj.facebook_group.general.list']}
+                        #{customer_type['obj.customer_type.general.list']}
                     </div>
                     <br/>
                     <br/>

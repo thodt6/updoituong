@@ -6,6 +6,7 @@
                 template="/WEB-INF/template.xhtml">
     <f:metadata>       
         <f:event type="preRenderView" listener="#{userSessionBean.verifyAccessPage}"/>
+        <f:event type="preRenderView" listener="#{customer_typeService.loadObjects}"/>
     </f:metadata>
     <ui:define name="title">#{facebook_group['obj.facebook_group.general.list']}</ui:define>
     <ui:define name="viewname">#{facebook_group['obj.facebook_group.general.list']} / #{facebook_group['obj.facebook_group.general.create']}</ui:define>

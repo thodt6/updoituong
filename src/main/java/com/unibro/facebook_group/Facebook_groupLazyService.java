@@ -28,6 +28,7 @@ import org.primefaces.model.LazyDataModel;
 @ViewScoped
 public class Facebook_groupLazyService implements Serializable {
 
+    private Integer customer_type_id;
     private LazyDataModel<Facebook_group> lazyModel;
     private Facebook_group selectedObject = new Facebook_group();
     private Facebook_group[] selectedObjects;
@@ -95,10 +96,19 @@ public class Facebook_groupLazyService implements Serializable {
 
     public void createObject() {
         if (this.getNewObject() != null) {
+            this.getNewObject().setCreated_id(UserSessionBean.getUserSession().getUser().getUserid() + "");
+            this.getNewObject().setState("P");
             Facebook_groupDAO dao = new Facebook_groupDAO();
             Facebook_group result = dao.create(getNewObject());
             if (result != null) {
                 this.newObject = result;
+                try {
+                    this.deliverConvertTask(this.newObject);
+                } catch (IOException ex) {
+                    logger.error(ex);
+                } catch (TimeoutException ex) {
+                    logger.error(ex);
+                }
                 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, Global.getResourceLanguage("general.operationSuccess"), "");
                 FacesContext.getCurrentInstance().addMessage(null, msg);
             } else {
@@ -163,18 +173,38 @@ public class Facebook_groupLazyService implements Serializable {
         }
     }
 
+    public void doRetryConvert() {
+        if (this.selectedObject != null) {
+            try {
+                this.deliverConvertTask(this.selectedObject);
+                FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, Global.getResourceLanguage("general.operationSuccess"), "");
+                FacesContext.getCurrentInstance().addMessage(null, msg);
+            } catch (IOException ex) {
+                logger.error(ex);
+                FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, Global.getResourceLanguage("general.operationFail"), "");
+                FacesContext.getCurrentInstance().addMessage(null, msg);
+            } catch (TimeoutException ex) {
+                logger.error(ex);
+                FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, Global.getResourceLanguage("general.operationFail"), "");
+                FacesContext.getCurrentInstance().addMessage(null, msg);
+            }
+        }
+    }
+
     public void doImportData() {
         String[] group_id_list = this.getImportData().split("\n");
+        logger.info("List:" + this.getImportData());
         Facebook_groupDAO dao = new Facebook_groupDAO();
         int size = 0;
         for (String id : group_id_list) {
             Facebook_group g = new Facebook_group();
-            g.setGroupid(id);
-            g.setName("https://facebook.com/" + id);
+            g.setGroupid(id.trim());
+            g.setName(id.trim());
             g.setCreated_id(UserSessionBean.getUserSession().getUser().getUserid() + "");
             g.setState("P");
             g.setTotal_member(0);
             g.setUid_file("");
+            g.setCustomer_type(customer_type_id);
             if (dao.create(g) != null) {
                 size++;
                 logger.info("Added group task:" + g.getGroupid() + ". Start delivered to MQ");
@@ -203,7 +233,7 @@ public class Facebook_groupLazyService implements Serializable {
 
         channel.basicPublish("", TASK_QUEUE_NAME,
                 MessageProperties.PERSISTENT_TEXT_PLAIN,
-                message.getBytes());
+                message.getBytes("UTF-8"));
         logger.info(" [x] Sent '" + message + "'");
         channel.close();
         connection.close();
@@ -221,6 +251,29 @@ public class Facebook_groupLazyService implements Serializable {
      */
     public void setImportData(String importData) {
         this.importData = importData;
+    }
+
+    /**
+     * @return the customer_type_id
+     */
+    public Integer getCustomer_type_id() {
+        return customer_type_id;
+    }
+
+    /**
+     * @param customer_type_id the customer_type_id to set
+     */
+    public void setCustomer_type_id(Integer customer_type_id) {
+        this.customer_type_id = customer_type_id;
+    }
+
+    public void updateAllGroupInfo() {
+        Facebook_groupDAO dao = new Facebook_groupDAO();
+        List<Facebook_group> list = dao.load(0, -1, "null", 0, new ArrayList());
+        for (Facebook_group g : list) {
+            g.extracInfoFromFacebook();
+            g.editMe();
+        }
     }
 
 }

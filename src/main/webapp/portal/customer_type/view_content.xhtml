@@ -1,0 +1,22 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank lesspad">
+        <h:outputLabel style="font-weight:bolder" value="#{customer_type['obj.customer_type.detail.type_id']} (*)"/>
+        <h:outputText style="white-space: pre-wrap" value="#{customer_typeLazyService.selectedObject.type_id}"/>
+        <h:outputLabel style="font-weight:bolder" value="#{customer_type['obj.customer_type.detail.name']} (*)"/>
+        <h:outputText style="white-space: pre-wrap" value="#{customer_typeLazyService.selectedObject.name}"/>
+        <h:outputLabel style="font-weight:bolder" value="#{customer_type['obj.customer_type.detail.created_time']}"/>
+        <h:outputText value="#{customer_typeLazyService.selectedObject.created_time}">
+            <f:convertDateTime type="date" timeZone="GMT+7" pattern="dd/MM/yyyy HH:mm:ss"/>
+        </h:outputText>
+        <h:outputLabel style="font-weight:bolder" value="#{customer_type['obj.customer_type.detail.description']}"/>
+        <h:outputText style="white-space: pre-wrap" value="#{customer_typeLazyService.selectedObject.description}"/>
+        <h:outputLabel style="font-weight:bolder" value="#{customer_type['obj.customer_type.detail.created_id']}"/>
+        <h:outputText style="white-space: pre-wrap" value="#{customer_typeLazyService.selectedObject.created_id}"/>
+
+    </p:panelGrid>
+</ui:composition>

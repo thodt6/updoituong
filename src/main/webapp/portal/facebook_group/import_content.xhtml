@@ -5,9 +5,16 @@
                 xmlns:p="http://primefaces.org/ui">
 
     <p:panelGrid columns="1" layout="grid" styleClass="ui-panelgrid-blank lesspad">
+        <h:outputLabel style="font-weight:bolder" value="Customer Type"/>
+        <p:outputPanel>
+            <p:selectOneMenu value="#{facebook_groupLazyService.customer_type_id}">
+                <f:selectItem itemLabel="Select One" itemValue="#{null}" noSelectionOption="true" />
+                <f:selectItems value="#{customer_typeService.objects}" var="c" itemLabel="#{c.name}" itemValue="#{c.type_id}"/>
+            </p:selectOneMenu>
+        </p:outputPanel> 
         <h:outputLabel style="font-weight:bolder" value="Import Facebook cookies"/>
         <p:outputPanel>
-            <p:inputTextarea cols="100" rows="50" value="#{fb_cookieLazyService.import_data}"/>
-        </p:outputPanel>        
+            <p:inputTextarea cols="100" rows="50" value="#{facebook_groupLazyService.importData}"/>
+        </p:outputPanel> 
     </p:panelGrid>
 </ui:composition>

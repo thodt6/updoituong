@@ -21,6 +21,21 @@
         <h:outputText style="white-space: pre-wrap" value="#{facebook_groupLazyService.selectedObject.created_id}"/>
         <h:outputLabel style="font-weight:bolder" value="#{facebook_group['obj.facebook_group.detail.total_member']}"/>
         <h:outputText style="white-space: pre-wrap" value="#{facebook_groupLazyService.selectedObject.total_member}"/>
-
+        <h:outputLabel style="font-weight:bolder" value="#{facebook_group['obj.facebook_group.detail.description']}"/>
+        <h:outputText style="white-space: pre-wrap" value="#{facebook_groupLazyService.selectedObject.description}"/>
+        <h:outputLabel style="font-weight:bolder" value="#{facebook_group['obj.facebook_group.detail.email']}"/>
+        <h:outputText style="white-space: pre-wrap" value="#{facebook_groupLazyService.selectedObject.email}"/>
+        <h:outputLabel style="font-weight:bolder" value="#{facebook_group['obj.facebook_group.detail.icon']}"/>
+        <h:graphicImage value="#{facebook_groupLazyService.selectedObject.icon}" width="50%"/>
+        <h:outputLabel style="font-weight:bolder" value="#{facebook_group['obj.facebook_group.detail.owner_id']}"/>
+        <h:outputText style="white-space: pre-wrap" value="#{facebook_groupLazyService.selectedObject.owner_id}"/>
+        <h:outputLabel style="font-weight:bolder" value="#{facebook_group['obj.facebook_group.detail.privacy']}"/>
+        <h:outputText style="white-space: pre-wrap" value="#{facebook_groupLazyService.selectedObject.privacy}"/>
+        <h:outputLabel style="font-weight:bolder" value="#{facebook_group['obj.facebook_group.detail.updated_time']}"/>
+        <h:outputText style="white-space: pre-wrap" value="#{facebook_groupLazyService.selectedObject.updated_time}"/>
+        <h:outputLabel style="font-weight:bolder" value="#{facebook_group['obj.facebook_group.detail.customer_type']}"/>
+        <p:selectOneMenu value="#{facebook_groupLazyService.selectedObject.customer_type}">
+            <f:selectItems value="#{customer_typeService.objects}" var="c" itemLabel="#{c.name}" itemValue="#{c.type_id}"/>
+        </p:selectOneMenu>        
     </p:panelGrid>
 </ui:composition>

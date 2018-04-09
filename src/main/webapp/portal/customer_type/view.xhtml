@@ -6,12 +6,11 @@
                 template="/WEB-INF/template.xhtml">
     <f:metadata>       
         <f:event type="preRenderView" listener="#{userSessionBean.verifyAccessPage}"/>
-        <f:viewParam id="id" name="id" value="#{facebook_groupLazyService.selectedId}"/>
-        <f:event type="preRenderView" listener="#{facebook_groupLazyService.initSelectedObject}"/>
-        <f:event type="preRenderView" listener="#{customer_typeService.loadObjects}"/>
+        <f:viewParam id="id" name="id" value="#{customer_typeLazyService.selectedId}"/>
+        <f:event type="preRenderView" listener="#{customer_typeLazyService.initSelectedObject}"/>
     </f:metadata>
-    <ui:define name="title">#{facebook_group['obj.facebook_group.general']}</ui:define>
-    <ui:define name="viewname">#{facebook_group['obj.facebook_group.general']} / #{facebook_groupLazyService.selectedObject.uniqueKey}</ui:define>
+    <ui:define name="title">#{customer_type['obj.customer_type.general']}</ui:define>
+    <ui:define name="viewname">#{customer_type['obj.customer_type.general']} / #{customer_typeLazyService.selectedObject.uniqueKey}</ui:define>
     <ui:define name="content">
         <div class="ui-g">
             <div class="ui-g-12 ui-lg-12">
@@ -22,7 +21,7 @@
                     <div style=" float: left">
                         <i class="fa fa-fw fa-info"/>
                         <p:spacer width="10"/>
-                        #{facebook_group['obj.facebook_group.general']} / #{facebook_groupLazyService.selectedObject.uniqueKey}
+                        #{customer_type['obj.customer_type.general']} / #{customer_typeLazyService.selectedObject.uniqueKey}
                     </div>
                     <br/>
                     <br/>
@@ -43,7 +42,7 @@
                                 <p:panel>
                                     <div class="card">
                                         <i class="fa fa-lightbulb-o fa-2x"/>
-                                        <p><h:outputText escape="false" value="#{facebook_group['obj.facebook_group.general.help']}"/></p>
+                                        <p><h:outputText escape="false" value="#{customer_type['obj.customer_type.general.help']}"/></p>
                                     </div>
                                 </p:panel>
                             </div>
