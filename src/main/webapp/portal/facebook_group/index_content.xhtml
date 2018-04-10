@@ -17,25 +17,21 @@
             <f:facet name="header">
                 #{facebook_group['obj.facebook_group.detail.groupid']}
             </f:facet>
-            <h:graphicImage value="#{obj.icon}"/>
-            <p:spacer width="10"/>
+	    <h:graphicImage value="#{obj.icon}"/>
+            <p:spacer width="10"/>	
             <p:link value="#{obj.groupid}" href="https://facebook.com/#{obj.groupid}" target="_blank"/>
         </p:column>
         <p:column style="text-align: left;" filterBy="#{obj.name}" filterMatchMode="contains" filterStyle="width:95%">
             <f:facet name="header">
                 #{facebook_group['obj.facebook_group.detail.name']}
             </f:facet>
-            <h:outputText style="white-space: pre-wrap" value="#{obj.name}"/>            
-        </p:column>
-        <p:column style="text-align: left;" filterBy="#{obj.created_time}" filterMatchMode="contains" filterStyle="width:95%">
-            <f:facet name="header">
-                #{facebook_group['obj.facebook_group.detail.created_time']}
-            </f:facet>
-            <h:outputText value="#{obj.created_time}">
+            <h:outputText style="white-space: pre-wrap; font-weight:  bolder" value="#{obj.name}"/>
+            <br/>
+            <h:outputText style=" font-style:  italic" value="#{obj.created_time}">
                 <f:convertDateTime type="date" timeZone="GMT+7" pattern="dd/MM/yyyy HH:mm:ss"/>
             </h:outputText>
-        </p:column>       
-        <p:column style="text-align: left;" filterBy="#{obj.state}" filterMatchMode="exact" filterStyle="width:95%">
+        </p:column>      
+        <p:column style="text-align: left; width:10%" filterBy="#{obj.state}" filterMatchMode="exact" filterStyle="width:95%">
             <f:facet name="header">
                 #{facebook_group['obj.facebook_group.detail.state']}
             </f:facet>
@@ -54,17 +50,17 @@
                 #{facebook_group['obj.facebook_group.detail.customer_type']}
             </f:facet>
             <f:facet name="filter">
-                <p:selectOneMenu style="width:90%" onchange="PF('dlgTablefacebook_group').filter()" >
+                <p:selectOneMenu style="width:90%" filter="true" filterMatchMode="contains"   onchange="PF('dlgTablefacebook_group').filter()" >
                     <f:selectItem itemLabel="Select One" itemValue="#{null}" noSelectionOption="true" />
                     <f:selectItems value="#{customer_typeService.objects}" var="c" itemLabel="#{c.name}" itemValue="#{c.type_id}"/>
                 </p:selectOneMenu>
             </f:facet>
-            <p:selectOneMenu style="width:90%" value="#{obj.customer_type}">               
+            <p:selectOneMenu value="#{obj.customer_type}" filter="true" filterMatchMode="contains"   style="width:90%">               
                 <f:selectItems value="#{customer_typeService.objects}" var="c" itemLabel="#{c.name}" itemValue="#{c.type_id}"/>
                 <p:ajax event="change" listener="#{obj.editMe}"/>
             </p:selectOneMenu>
         </p:column>
-        <p:column style="text-align: left;" filterBy="#{obj.total_member}" filterMatchMode="contains" filterStyle="width:95%">
+        <p:column style="text-align: left;width:5%" filterBy="#{obj.total_member}" filterMatchMode="contains" filterStyle="width:95%">
             <f:facet name="header">
                 #{facebook_group['obj.facebook_group.detail.total_member']}
             </f:facet>
@@ -86,9 +82,9 @@
             </p:commandButton>
             <p:commandButton icon="fa fa-refresh" action="#{facebook_groupLazyService.doRetryConvert}" update=":frmObject:id_msg">
                 <f:setPropertyActionListener target="#{facebook_groupLazyService.selectedObject}" value="#{obj}"/>
-            </p:commandButton>
-            <p:commandButton icon="fa fa-group" action="#{obj.updateFbInfo}" update="@this">                
-            </p:commandButton>
+            </p:commandButton> 
+            <p:commandButton icon="fa fa-facebook" action="#{obj.updateFbInfo}" update=":frmObject:id_table_facebook_group">                
+            </p:commandButton>  
         </p:column>
         <f:facet name="footer">
 

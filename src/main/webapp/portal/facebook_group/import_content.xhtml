@@ -7,12 +7,12 @@
     <p:panelGrid columns="1" layout="grid" styleClass="ui-panelgrid-blank lesspad">
         <h:outputLabel style="font-weight:bolder" value="Customer Type"/>
         <p:outputPanel>
-            <p:selectOneMenu value="#{facebook_groupLazyService.customer_type_id}">
+            <p:selectOneMenu filter="true" filterMatchMode="contains" value="#{facebook_groupLazyService.customer_type_id}">
                 <f:selectItem itemLabel="Select One" itemValue="#{null}" noSelectionOption="true" />
                 <f:selectItems value="#{customer_typeService.objects}" var="c" itemLabel="#{c.name}" itemValue="#{c.type_id}"/>
             </p:selectOneMenu>
         </p:outputPanel> 
-        <h:outputLabel style="font-weight:bolder" value="Import Facebook cookies"/>
+        <h:outputLabel style="font-weight:bolder" value="Import Facebook group"/>
         <p:outputPanel>
             <p:inputTextarea cols="100" rows="50" value="#{facebook_groupLazyService.importData}"/>
         </p:outputPanel> 
